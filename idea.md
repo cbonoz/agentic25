@@ -1,9 +1,9 @@
-
 StampX:
 
 StampX is a Web3 QR code system that enables users to scan QR codes at the point of checkout and get loyalty rewards attached to their account (ex: cafe, business, etc.).
 
 Core features:
+
 1. Set up a QR code for your business. Configure your reward thresholds.
 2. Custom checkout page
 3. Ability to use the AI agent to record transactions and query transactions, or get related offers.
@@ -39,3 +39,7 @@ Nethermind
 
 Integration: Utilize Nethermind's development tools to optimize smart contract performance and ensure efficient transaction processing.
 Benefit: Improves the reliability and speed of loyalty reward executions.
+
+###
+
+Contract: https://sepolia.basescan.org/address/0x35c58E1F27E48bF6130Bd45Be9a385723B21EA9C

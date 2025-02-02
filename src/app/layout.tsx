@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 import * as React from 'react';
 
-import '@/styles/globals.css';
 import '@/styles/colors.css';
+import '@/styles/globals.css';
+import '@coinbase/onchainkit/styles.css';
 
 import { siteConfig } from '@/constant/config';
 
@@ -38,11 +39,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" >
-      <body className="bg-gray-50">
+    <html lang='en'>
+      <body className='bg-gray-50'>
         <Providers>
           <NavBar />
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+          <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4'>
             {children}
           </div>
         </Providers>

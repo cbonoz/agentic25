@@ -10,12 +10,12 @@ import { WalletProvider } from './contexts/WalletContext';
 export function Providers(props: { children: ReactNode }) {
   return (
     <WalletProvider>
-    <OnchainKitProvider
-      apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-      chain={siteConfig.defaultChain} // add baseSepolia for testing
-    >
-      {props.children}
-    </OnchainKitProvider>
-</WalletProvider>
+      <OnchainKitProvider
+        apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+        chain={siteConfig.defaultChain} // add baseSepolia for testing
+      >
+        {props.children}
+      </OnchainKitProvider>
+    </WalletProvider>
   );
 }
