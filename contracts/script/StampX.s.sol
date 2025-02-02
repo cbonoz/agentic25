@@ -2,17 +2,18 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {Counter} from "../src/Counter.sol";
+import {StampX} from "../src/StampX.sol";
 
-contract CounterScript is Script {
-    Counter public counter;
+contract StampXScript is Script {
+    StampX public stampX;
 
     function setUp() public {}
+
 
     function run() public {
         vm.startBroadcast();
 
-        counter = new Counter();
+        stampX = new StampX();
 
         vm.stopBroadcast();
     }

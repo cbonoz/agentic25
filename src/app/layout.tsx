@@ -13,10 +13,10 @@ import NavBar from './components/nav-bar';
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
+    default: 'StampX - Web3 Loyalty Rewards',
+    template: `%s | StampX`,
   },
-  description: siteConfig.description,
+  description: 'A Web3 QR code system for loyalty rewards, powered by Coinbase Developer Platform',
   robots: { index: true, follow: true },
   // !STARTERCONF this is the default favicon, you can generate your own from https://realfavicongenerator.net/
   // ! copy to /favicon folder
@@ -28,19 +28,18 @@ export const metadata: Metadata = {
   manifest: `/favicon/site.webmanifest`,
   openGraph: {
     url: siteConfig.url,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.title,
+    title: 'StampX - Web3 Loyalty Rewards',
+    description: 'A Web3 QR code system for loyalty rewards, powered by Coinbase Developer Platform',
+    siteName: 'StampX',
     images: [`${siteConfig.url}/images/og.jpg`],
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteConfig.title,
-    description: siteConfig.description,
+    title: 'StampX',
+    description: 'Web3 Loyalty Rewards Platform',
     images: [`${siteConfig.url}/images/og.jpg`],
-    // creator: '@th_clarence',
   },
   // authors: [
   //   {
@@ -57,10 +56,12 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className="bg-gray-50">
         <NavBar />
-        {children}
-        </body>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
