@@ -43,3 +43,5 @@ Benefit: Improves the reliability and speed of loyalty reward executions.
 ###
 
 Contract: https://sepolia.basescan.org/address/0x35c58E1F27E48bF6130Bd45Be9a385723B21EA9C
+
+Example checkout page: http://localhost:3000/checkout/0x24cfa40a93d4e455c945aa990b7a3fcaacd8a642188477397d42971163fd428c
