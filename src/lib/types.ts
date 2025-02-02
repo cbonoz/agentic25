@@ -1,4 +1,3 @@
-
 // returns (
 //   address owner,
 //   string memory name,
@@ -19,3 +18,25 @@ export enum BusinessCommand {
   makePayment = 'makePayment',
   claimRewards = 'claimRewards',
 }
+
+export interface ChatResponse {
+  command?: BusinessCommand;
+  amount?: string;
+  message: string;
+}
+
+export const BusinessCommands = [
+  {
+    command: BusinessCommand.makePayment,
+    regex: /(\d+\.?\d*)/,
+    keywords: ['pay', 'purchase', 'buy', 'spend']
+  },
+  {
+    command: BusinessCommand.checkRewards,
+    keywords: ['check', 'balance', 'points', 'rewards']
+  },
+  {
+    command: BusinessCommand.claimRewards,
+    keywords: ['claim', 'redeem', 'use']
+  }
+];

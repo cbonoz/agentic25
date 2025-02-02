@@ -1,6 +1,5 @@
 'use client';
 
-import { Dialog } from '@headlessui/react';
 import { useChat } from 'ai/react'; // https://sdk.vercel.ai/docs/getting-started/nextjs-app-router
 import { ethers } from 'ethers';
 import { useParams } from 'next/navigation';
@@ -9,11 +8,11 @@ import { FaExclamationTriangle } from 'react-icons/fa';
 
 import { useWallet } from '@/app/contexts/WalletContext';
 import { BusinessInfo as BusinessInfoComponent } from '@/components/business-info';
-import { siteConfig } from '@/constant/config';
-import StampXAbi from '@/contracts/StampX.json';
-import { BusinessCommand, BusinessCommands, BusinessInfo } from '@/lib/types';
 import { RewardsDialog } from '@/components/rewards-dialog';
 import { SignoutPrompt } from '@/components/signout-prompt';
+import { siteConfig } from '@/constant/config';
+import StampXAbi from '@/contracts/StampX.json';
+import { BusinessCommand, BusinessInfo, ChatResponse } from '@/lib/types';
 
 export default function CheckoutPage() {
   const { businessId } = useParams();
@@ -27,32 +26,30 @@ export default function CheckoutPage() {
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: '/api/chat',
-    onResponse: (response: any) => {
-      // Extract amount from AI response and process transaction
-      console.log('AI response:', response);
-      const command = extractCommand(response);
-      const amount = 0;
-      console.log('Extracted command:', command, amount);
-      if (amount) {
-        handleTransaction(amount);
+    onResponse: (response) => {
+      if (typeof response === 'string') {
+        const parsedResponse = JSON.parse(response) as ChatResponse;
+        console.log('AI response:', parsedResponse);
+
+        switch (parsedResponse.command) {
+          case BusinessCommand.makePayment:
+            if (parsedResponse.amount) {
+              handleTransaction(parsedResponse.amount);
+            }
+            break;
+          case BusinessCommand.checkRewards:
+            checkRewards();
+            break;
+          case BusinessCommand.claimRewards:
+            // Implement claim rewards logic
+            break;
+          default:
+            // Regular chat message, no action needed
+            break;
+        }
       }
     },
   });
-
-  const extractCommand = (response: string): BusinessCommand | null => {
-    const command = BusinessCommands.find((cmd: any) =>
-      response.includes(cmd.command),
-    );
-    if (!command) return null;
-
-    const amount = response.match(command.regex);
-    if (!amount) return null;
-
-    return {
-      command: command.command,
-      amount: amount[1],
-    };
-  };
 
   const handleTransaction = async (amount: string) => {
     if (!address || !provider || !businessId) return;
@@ -114,7 +111,8 @@ export default function CheckoutPage() {
 
       const info = await contract.getBusinessInfo(businessId);
 
-      if (!info || !info[1]) { // Check if name exists as basic validation
+      if (!info || !info[1]) {
+        // Check if name exists as basic validation
         throw new Error('Invalid business data received');
       }
 
@@ -152,7 +150,9 @@ export default function CheckoutPage() {
           <div className='flex items-center gap-3'>
             <FaExclamationTriangle className='text-red-500 w-6 h-6' />
             <div>
-              <h3 className='text-lg font-medium text-red-800'>Error Loading Business</h3>
+              <h3 className='text-lg font-medium text-red-800'>
+                Error Loading Business
+              </h3>
               <p className='text-red-600'>{error}</p>
               <button
                 onClick={() => fetchBusinessInfo()}
@@ -166,14 +166,18 @@ export default function CheckoutPage() {
       ) : (
         <div className='grid lg:grid-cols-[400px,1fr] gap-6'>
           <div className='lg:sticky lg:top-6 lg:self-start'>
-            {businessInfo && <BusinessInfoComponent businessInfo={businessInfo} />}
+            {businessInfo && (
+              <BusinessInfoComponent businessInfo={businessInfo} />
+            )}
           </div>
 
           <div className='space-y-6'>
             <h1 className='text-2xl font-bold'>Chat Checkout</h1>
 
             {!address ? (
-              <p className='text-red-500'>Please connect your wallet to continue</p>
+              <p className='text-red-500'>
+                Please connect your wallet to continue
+              </p>
             ) : (
               <>
                 <div className='space-y-4'>
