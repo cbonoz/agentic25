@@ -7,10 +7,10 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { useWallet } from '@/app/contexts/WalletContext';
+import { BusinessInfo as BusinessInfoComponent } from '@/components/business-info';
 import { siteConfig } from '@/constant/config';
 import StampXAbi from '@/contracts/StampX.json';
-import { BusinessInfo } from '@/lib/types';
-import { BusinessInfo as BusinessInfoComponent } from '@/components/business-info';
+import { BusinessCommand, BusinessCommands, BusinessInfo } from '@/lib/types';
 
 export default function CheckoutPage() {
   const { businessId } = useParams();
@@ -24,17 +24,29 @@ export default function CheckoutPage() {
     api: '/api/chat',
     onResponse: (response: any) => {
       // Extract amount from AI response and process transaction
-      const amount = extractAmountFromResponse(response);
+      console.log('AI response:', response);
+      const command = extractCommand(response);
+      const amount = 0;
+      console.log('Extracted command:', command, amount);
       if (amount) {
         handleTransaction(amount);
       }
     },
   });
 
-  const extractAmountFromResponse = (response: string) => {
-    // Simple regex to extract numerical amount
-    const match = response.match(/\$?(\d+(\.\d{1,2})?)/);
-    return match ? match[1] : null;
+  const extractCommand = (response: string): BusinessCommand | null => {
+    const command = BusinessCommands.find((cmd: any) =>
+      response.includes(cmd.command),
+    );
+    if (!command) return null;
+
+    const amount = response.match(command.regex);
+    if (!amount) return null;
+
+    return {
+      command: command.command,
+      amount: amount[1],
+    };
   };
 
   const handleTransaction = async (amount: string) => {
@@ -71,7 +83,7 @@ export default function CheckoutPage() {
     try {
       const contract = new ethers.Contract(
         siteConfig.contractAddress,
-        StampXAbi as any,
+        StampXAbi.abi,
         provider,
       );
       const points = await contract.getPoints(businessId, address);
@@ -113,8 +125,14 @@ export default function CheckoutPage() {
     }
   }, [provider, businessId]);
 
+  const calculatePointsToNextReward = () => {
+    if (!businessInfo || points === null) return null;
+    const threshold = Number(businessInfo.rewardThreshold);
+    return Math.max(0, threshold - points);
+  };
+
   return (
-    <div className='max-w-lg mx-auto mt-10 p-6'>
+    <div className='max-w-lg mx-auto mt-2 p-6'>
       {businessInfo && <BusinessInfoComponent businessInfo={businessInfo} />}
 
       <h1 className='text-2xl font-bold my-6'>Chat Checkout</h1>
@@ -178,7 +196,15 @@ export default function CheckoutPage() {
                   Your Rewards
                 </Dialog.Title>
                 <div className='mt-4'>
-                  {points !== null && <p>Current Points Balance: {points}</p>}
+                  {points !== null && (
+                    <>
+                      <p>Current Points Balance: {points}</p>
+                      <p className='mt-2'>
+                        Amount needed for next reward:{' '}
+                        {calculatePointsToNextReward()}
+                      </p>
+                    </>
+                  )}
                 </div>
                 <button
                   onClick={() => setIsRewardsOpen(false)}

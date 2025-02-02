@@ -13,3 +13,9 @@ export interface BusinessInfo {
   rewardAmount: string;
   isActive: boolean;
 }
+
+export enum BusinessCommand {
+  checkRewards = 'checkRewards',
+  makePayment = 'makePayment',
+  claimRewards = 'claimRewards',
+}
