@@ -47,7 +47,7 @@ export default function HomePage() {
           </ArrowLink>
 
           <footer className='absolute bottom-2 text-gray-700'>
-            StampX &copy; {new Date().getFullYear()} - Built during ETHDenver 2024
+            StampX &copy; {new Date().getFullYear()}
           </footer>
         </div>
       </section>
