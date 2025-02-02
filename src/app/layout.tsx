@@ -2,51 +2,34 @@ import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
 
 import { siteConfig } from '@/constant/config';
-import NavBar from './components/nav-bar';
 
-// !STARTERCONF Change these default meta
-// !STARTERCONF Look at @/constant/config to change them
+import NavBar from './components/nav-bar';
+import { Providers } from './providers';
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'StampX - Web3 Loyalty Rewards',
-    template: `%s | StampX`,
+    default: siteConfig.defaultTitle,
+    template: siteConfig.titleTemplate,
   },
-  description: 'A Web3 QR code system for loyalty rewards, powered by Coinbase Developer Platform',
+  description: siteConfig.description,
   robots: { index: true, follow: true },
-  // !STARTERCONF this is the default favicon, you can generate your own from https://realfavicongenerator.net/
-  // ! copy to /favicon folder
-  icons: {
-    icon: '/favicon/favicon.ico',
-    shortcut: '/favicon/favicon-16x16.png',
-    apple: '/favicon/apple-touch-icon.png',
-  },
-  manifest: `/favicon/site.webmanifest`,
+  icons: siteConfig.icons,
+  manifest: siteConfig.manifest,
   openGraph: {
+    ...siteConfig.openGraph,
     url: siteConfig.url,
-    title: 'StampX - Web3 Loyalty Rewards',
-    description: 'A Web3 QR code system for loyalty rewards, powered by Coinbase Developer Platform',
-    siteName: 'StampX',
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
     images: [`${siteConfig.url}/images/og.jpg`],
-    type: 'website',
-    locale: 'en_US',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'StampX',
-    description: 'Web3 Loyalty Rewards Platform',
+    ...siteConfig.twitter,
     images: [`${siteConfig.url}/images/og.jpg`],
   },
-  // authors: [
-  //   {
-  //     name: 'Theodorus Clarence',
-  //     url: 'https://theodorusclarence.com',
-  //   },
-  // ],
 };
 
 export default function RootLayout({
@@ -55,12 +38,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html lang="en" >
       <body className="bg-gray-50">
-        <NavBar />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-          {children}
-        </div>
+        <Providers>
+          <NavBar />
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

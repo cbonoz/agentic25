@@ -1,14 +1,14 @@
 'use client';
 
-import clsx from 'clsx';
 import {
-  ArrowRight,
-  CreditCard,
-  Laptop,
-  Phone,
-  Plus,
-  Shield,
-} from 'lucide-react';
+  ArrowRightIcon,
+  ComputerDesktopIcon,
+  CreditCardIcon,
+  DevicePhoneMobileIcon,
+  PlusIcon,
+  ShieldCheckIcon,
+} from '@heroicons/react/24/outline';
+import clsx from 'clsx';
 import React from 'react';
 
 import Button from '@/components/buttons/Button';
@@ -41,7 +41,7 @@ export default function ComponentPage() {
         <div
           className={clsx(
             'layout min-h-screen py-20',
-            mode === 'dark' ? 'text-white' : 'text-black'
+            mode === 'dark' ? 'text-white' : 'text-black',
           )}
         >
           <h1>Built-in Components</h1>
@@ -76,7 +76,7 @@ export default function ComponentPage() {
                     mode === 'dark'
                       ? 'bg-dark border border-gray-600'
                       : 'border-gray-300 bg-white',
-                    'focus:border-primary-400 focus:ring-primary-400 focus:outline-none focus:ring'
+                    'focus:border-primary-400 focus:ring-primary-400 focus:outline-none focus:ring',
                   )}
                   onChange={(e) => setColor(e.target.value as Color)}
                 >
@@ -249,31 +249,39 @@ export default function ComponentPage() {
               <div className='flex flex-wrap gap-2'>
                 <Button
                   variant='primary'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                 >
                   Icon
                 </Button>
                 <Button
                   variant='outline'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                   isDarkBg={mode === 'dark'}
                 >
                   Icon
                 </Button>
                 <Button
                   variant='ghost'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                   isDarkBg={mode === 'dark'}
                 >
                   Icon
                 </Button>
-                <Button variant='dark' leftIcon={Plus} rightIcon={ArrowRight}>
+                <Button
+                  variant='dark'
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
+                >
                   Icon
                 </Button>
-                <Button variant='light' leftIcon={Plus} rightIcon={ArrowRight}>
+                <Button
+                  variant='light'
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
+                >
                   Icon
                 </Button>
               </div>
@@ -298,16 +306,16 @@ export default function ComponentPage() {
                 <Button
                   size='sm'
                   variant='primary'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                 >
                   Icon
                 </Button>
                 <Button
                   size='sm'
                   variant='outline'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                   isDarkBg={mode === 'dark'}
                 >
                   Icon
@@ -315,8 +323,8 @@ export default function ComponentPage() {
                 <Button
                   size='sm'
                   variant='ghost'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                   isDarkBg={mode === 'dark'}
                 >
                   Icon
@@ -325,16 +333,16 @@ export default function ComponentPage() {
                 <Button
                   size='sm'
                   variant='dark'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                 >
                   Icon
                 </Button>
                 <Button
                   size='sm'
                   variant='light'
-                  leftIcon={Plus}
-                  rightIcon={ArrowRight}
+                  leftIcon={PlusIcon}
+                  rightIcon={ArrowRightIcon}
                 >
                   Icon
                 </Button>
@@ -391,11 +399,11 @@ export default function ComponentPage() {
                 Button with only icon inside
               </p>
               <div className='space-x-2'>
-                <IconButton icon={Plus} />
-                <IconButton variant='outline' icon={Laptop} />
-                <IconButton variant='ghost' icon={Phone} />
-                <IconButton variant='dark' icon={Shield} />
-                <IconButton variant='light' icon={CreditCard} />
+                <IconButton icon={PlusIcon} />
+                <IconButton variant='outline' icon={ComputerDesktopIcon} />
+                <IconButton variant='ghost' icon={DevicePhoneMobileIcon} />
+                <IconButton variant='dark' icon={ShieldCheckIcon} />
+                <IconButton variant='light' icon={CreditCardIcon} />
               </div>
             </li>
             <li className='space-y-2'>

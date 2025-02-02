@@ -1,15 +1,11 @@
 'use client';
 
+import { BuildingStorefrontIcon, QrCodeIcon, TicketIcon } from '@heroicons/react/24/outline';
 import Head from 'next/head';
-import * as React from 'react';
 import '@/lib/env';
 
 import ArrowLink from '@/components/links/ArrowLink';
 import ButtonLink from '@/components/links/ButtonLink';
-import UnderlineLink from '@/components/links/UnderlineLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
-import { QrCodeIcon, TicketIcon, BuildingStorefrontIcon, UserGroupIcon } from '@heroicons/react/24/outline';
-import { siteConfig } from '@/constant/config';
 
 export default function HomePage() {
   return (
@@ -38,7 +34,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <ButtonLink className='mt-6' href='/dashboard' variant='light'>
+          <ButtonLink className='mt-6' href='/create' variant='light'>
             Launch App
           </ButtonLink>
 
