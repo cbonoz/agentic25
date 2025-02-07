@@ -11,6 +11,20 @@ export interface BusinessInfo {
   rewardThreshold: string;
   rewardAmount: string;
   isActive: boolean;
+  paymentAddress: string;
+  businessContext: string;
+}
+
+export interface CreateBusinessPayload {
+  name: string;
+  rewardThreshold: string;
+  rewardAmount: string;
+  paymentAddress: string;
+  businessContext: string;
+}
+
+export interface DemoBusinessData extends CreateBusinessPayload {
+  businessContext: string;
 }
 
 export enum BusinessCommand {

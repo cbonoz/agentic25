@@ -8,6 +8,8 @@ contract StampX {
         uint256 rewardThreshold;
         uint256 rewardAmount;
         bool isActive;
+        address paymentAddress;
+        string businessContext; 
     }
 
     struct Transaction {
@@ -36,7 +38,9 @@ contract StampX {
         bytes32 businessHash,
         string memory name,
         uint256 rewardThreshold,
-        uint256 rewardAmount
+        uint256 rewardAmount,
+        address paymentAddress,
+        string memory businessContext
     ) external {
         require(!businesses[businessHash].isActive, "Business already registered");
 
@@ -45,7 +49,9 @@ contract StampX {
             name: name,
             rewardThreshold: rewardThreshold,
             rewardAmount: rewardAmount,
-            isActive: true
+            isActive: true,
+            paymentAddress: paymentAddress == address(0) ? msg.sender : paymentAddress,
+            businessContext: businessContext
         });
 
         emit BusinessRegistered(businessHash, name, msg.sender);
@@ -110,7 +116,9 @@ contract StampX {
             string memory name,
             uint256 rewardThreshold,
             uint256 rewardAmount,
-            bool isActive
+            bool isActive,
+            address paymentAddress,    // Added return value
+            string memory businessContext    // Added return value
         )
     {
         Business storage business = businesses[businessHash];
@@ -119,7 +127,9 @@ contract StampX {
             business.name,
             business.rewardThreshold,
             business.rewardAmount,
-            business.isActive
+            business.isActive,
+            business.paymentAddress,
+            business.businessContext
         );
     }
 }

@@ -18,7 +18,7 @@ export default function HomePage() {
         <title>StampX - Web3 Loyalty Rewards</title>
       </Head>
       <section className='bg-white'>
-        <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
+        <div className='layout relative flex min-h-screen flex-col items-center justify-center py-8 text-center'>
           <QrCodeIcon className='h-16 w-16 text-primary-500' />
           <h1 className='mt-4'>StampX</h1>
           <p className='mt-2 text-sm text-gray-800'>
@@ -43,7 +43,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <ButtonLink className='mt-6' href='/create' variant='light'>
+          <ButtonLink className='mt-6' href='/launch' variant='light'>
             Launch Store
           </ButtonLink>
 

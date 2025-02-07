@@ -17,7 +17,7 @@ import { siteConfig } from '@/constant/config';
 const navigation = [
   // { name: 'Dashboard', href: '/dashboard', current: true },
   { name: 'Home', href: '/', current: false },
-  { name: 'Create Store', href: '/create', current: false },
+  { name: 'Launch Store', href: '/launch', current: false },
   { name: 'About', href: '/about', current: false },
   // { name: 'Rewards', href: '/rewards', current: false },
   // { name: 'Analytics', href: '/analytics', current: false },

@@ -26,15 +26,16 @@ function extractCommand(text: string): ChatResponse {
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json();
+    const { messages, businessContext } = await req.json();
     const lastMessage = messages[messages.length - 1];
 
-    // Initialize agent with configuration
     const { agent, config } = await getAgent();
 
-    // Process message through agent and get stream
+    // Add business context to the message
+    const messageWithContext = `[Business Context: ${businessContext}]\n\n${lastMessage.content}`;
+
     const stream = await agent.stream(
-      { messages: [new HumanMessage(lastMessage.content)] },
+      { messages: [new HumanMessage(messageWithContext)] },
       config
     );
 

@@ -26,6 +26,9 @@ export default function CheckoutPage() {
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: '/api/chat',
+    body: {
+      businessContext: businessInfo?.businessContext
+    },
     onResponse: (response) => {
       if (typeof response === 'string') {
         const parsedResponse = JSON.parse(response) as ChatResponse;
@@ -52,7 +55,7 @@ export default function CheckoutPage() {
   });
 
   const handleTransaction = async (amount: string) => {
-    if (!address || !provider || !businessId) return;
+    if (!address || !provider || !businessId || !businessInfo) return;
 
     try {
       setLoading(true);
@@ -64,8 +67,8 @@ export default function CheckoutPage() {
       );
 
       const tx = await contract.recordTransaction(
-        businessId, // Use businessId instead of contract address
-        address,
+        businessId,
+        businessInfo.paymentAddress, // Use payment address from business info
         ethers.parseEther(amount),
       );
       await tx.wait();
@@ -122,6 +125,8 @@ export default function CheckoutPage() {
         rewardThreshold: ethers.formatEther(info[2]),
         rewardAmount: ethers.formatEther(info[3]),
         isActive: info[4],
+        paymentAddress: info[5],
+        businessContext: info[6]
       });
     } catch (error: any) {
       console.error('Error fetching business info:', error);

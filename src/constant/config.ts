@@ -4,13 +4,15 @@ export const siteConfig = {
   titleTemplate: '%s | StampX',
   defaultTitle: 'StampX - Web3 Loyalty Rewards',
   defaultChain: baseSepolia,
-  description: 'A Web3 QR code system for loyalty rewards, powered by Coinbase Developer Platform',
+  description:
+    'A Web3 QR code system for loyalty rewards, powered by Coinbase Developer Platform',
   url: 'https://www.github.com/cbonoz/agentic25',
   contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ?? '0x0',
   icons: {
     icon: '/favicon/favicon.ico',
     shortcut: '/favicon/favicon-16x16.png',
     apple: '/favicon/apple-touch-icon.png',
+    logo: '/images/stampx-logo.png', // Add this line
   },
   manifest: '/favicon/site.webmanifest',
   twitter: {
@@ -22,5 +24,20 @@ export const siteConfig = {
     siteName: 'StampX',
     locale: 'en_US',
     type: 'website',
-  }
+  },
+  slogan: 'AI-Powered Loyalty Rewards for Web3 Business',
+  businessDescription:
+    'Launch an instant AI checkout assistant that can accept crypto payments and reward your customers right at point of sale.',
+  createBusinessHeading: 'Your AI Loyalty Assistant',
+  formTooltips: {
+    businessName: 'The name of your business that customers will see',
+    businessContext:
+      'Detailed instructions for your AI assistant about your business, menu items, and how to interact with customers',
+    rewardThreshold:
+      'Minimum total amount in ETH required for customers to earn a reward',
+    rewardAmount:
+      'Amount in ETH that customers receive as a reward when reaching the threshold',
+    paymentAddress:
+      'Ethereum address where you want to receive customer payments',
+  },
 };
