@@ -34,9 +34,9 @@ export const siteConfig = {
     businessContext:
       'Detailed instructions for your AI assistant about your business, menu items, and how to interact with customers',
     rewardThreshold:
-      'Minimum total amount in ETH required for customers to earn a reward',
+      'Minimum total amount in USD required for customers to earn a reward',
     rewardAmount:
-      'Amount in ETH that customers receive as a reward when reaching the threshold',
+      'Amount in USD that customers receive as a reward when reaching the threshold',
     paymentAddress:
       'Ethereum address where you want to receive customer payments',
   },

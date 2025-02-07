@@ -33,14 +33,12 @@ export default function LaunchPage() {
 
   const [result, setResult] = useState<CreateBusinessResult>({});
 
-  // Add useEffect to auto-fill payment address
+  // Update useEffect to sync payment address with wallet address
   useEffect(() => {
-    if (address) {
-      setFormData((prev) => ({
-        ...prev,
-        paymentAddress: address,
-      }));
-    }
+    setFormData((prev) => ({
+      ...prev,
+      paymentAddress: address || '',
+    }));
   }, [address]);
 
   const [loading, setLoading] = useState(false);
@@ -75,6 +73,8 @@ export default function LaunchPage() {
         formData.name,
         ethers.parseEther(formData.rewardThreshold),
         ethers.parseEther(formData.rewardAmount),
+        formData.paymentAddress,
+        formData.businessContext,
       );
 
       await tx.wait();
@@ -114,7 +114,7 @@ export default function LaunchPage() {
       name: DEMO_FORM_DATA.name,
       rewardThreshold: DEMO_FORM_DATA.rewardThreshold,
       rewardAmount: DEMO_FORM_DATA.rewardAmount,
-      paymentAddress: DEMO_FORM_DATA.paymentAddress,
+      paymentAddress: formData.paymentAddress || DEMO_FORM_DATA.paymentAddress,
       businessContext: DEMO_FORM_DATA.businessContext,
     });
   };
@@ -269,7 +269,7 @@ export default function LaunchPage() {
                   htmlFor='rewardThreshold'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Reward Threshold (ETH)
+                  Reward Threshold ($)
                 </label>
                 <Tooltip content={siteConfig.formTooltips.rewardThreshold} />
               </div>
@@ -291,7 +291,7 @@ export default function LaunchPage() {
                   htmlFor='rewardAmount'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Reward Amount (ETH)
+                  Reward Amount ($)
                 </label>
                 <Tooltip content={siteConfig.formTooltips.rewardAmount} />
               </div>
