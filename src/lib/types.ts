@@ -23,6 +23,10 @@ export interface CreateBusinessPayload {
   businessContext: string;
 }
 
+export interface CreateBusinessResult {
+  businessId?: string;
+}
+
 export interface DemoBusinessData extends CreateBusinessPayload {
   businessContext: string;
 }

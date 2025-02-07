@@ -1,17 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { createCheckoutUrl } from '@/lib/utils';
+import { useParams } from 'next/navigation';
 import QRCode from 'react-qr-code';
 
 export default function QRPage() {
-  const searchParams = useSearchParams();
-  const hash = searchParams.get('hash');
+  const { businessId: hash } = useParams();
 
   if (!hash) {
-    return <div className='p-4'>Error: No hash provided</div>;
+    return (
+      <div className='p-4'>
+        Error: No business extension provided in url
+        <br />
+        Got to: <pre>/qr/[businessId]</pre>
+      </div>
+    );
   }
 
-  const checkoutUrl = `${window.location.origin}/checkout/${hash}`;
+  const checkoutUrl = createCheckoutUrl(hash as string);
 
   return (
     <div className='flex flex-col items-center justify-center min-h-screen p-4'>
