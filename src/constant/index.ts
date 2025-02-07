@@ -2,8 +2,8 @@ import { DemoBusinessData } from '@/lib/types';
 
 export const DEMO_FORM_DATA: DemoBusinessData = {
   name: 'Coffee Shop Demo',
-  rewardThreshold: '0.01',
-  rewardAmount: '0.002',
+  rewardThreshold: '10.00',
+  rewardAmount: '2.00',
   paymentAddress: '0x0000000000000000000000000000000000000000',
   businessContext: `You are CoffeeBot, an AI assistant for our cozy coffee shop that offers loyalty rewards for regular customers.
 
@@ -13,9 +13,9 @@ You help customers with:
 - Redeeming rewards for free drinks
 - Answering questions about our menu and specials
 
-Keep responses friendly and concise. Always mention our loyalty program for orders over 0.01 ETH.
+Keep responses friendly and concise. Always mention our loyalty program for orders over $10.
 Recommend our house specialty drinks when appropriate.
 
-Menu context: We serve espresso drinks, pour-overs, and cold brew ranging from 0.005-0.015 ETH.
-House specialties include Vanilla Bean Latte (0.012 ETH) and Cold Brew Tonic (0.01 ETH).`
+Menu context: We serve espresso drinks, pour-overs, and cold brew ranging from $4.50-$7.00.
+House specialties include Vanilla Bean Latte ($6.50) and Cold Brew Tonic ($6.00).`
 };

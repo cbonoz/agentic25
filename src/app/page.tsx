@@ -7,6 +7,7 @@ import {
   TicketIcon,
 } from '@heroicons/react/24/outline';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import ArrowLink from '@/components/links/ArrowLink';
 import ButtonLink from '@/components/links/ButtonLink';
@@ -27,20 +28,24 @@ export default function HomePage() {
           </p>
 
           <div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2'>
-            <div className='rounded-lg border p-4'>
-              <BuildingStorefrontIcon className='mx-auto h-8 w-8 text-primary-500' />
-              <h3 className='mt-2 text-lg font-bold'>For Businesses</h3>
-              <p className='text-sm text-gray-600'>
-                Set up QR codes and configure custom rewards for your customers
-              </p>
-            </div>
-            <div className='rounded-lg border p-4'>
-              <TicketIcon className='mx-auto h-8 w-8 text-primary-500' />
-              <h3 className='mt-2 text-lg font-bold'>For Customers</h3>
-              <p className='text-sm text-gray-600'>
-                Scan, earn, and redeem rewards with smart contract security
-              </p>
-            </div>
+            <Link href='/launch'>
+              <div className='rounded-lg border p-4 transition-all hover:border-primary-500 hover:shadow-md cursor-pointer'>
+                <BuildingStorefrontIcon className='mx-auto h-8 w-8 text-primary-500' />
+                <h3 className='mt-2 text-lg font-bold'>For Businesses</h3>
+                <p className='text-sm text-gray-600'>
+                  Set up QR codes and configure custom rewards for your customers
+                </p>
+              </div>
+            </Link>
+            <Link href='/about'>
+              <div className='rounded-lg border p-4 transition-all hover:border-primary-500 hover:shadow-md cursor-pointer'>
+                <TicketIcon className='mx-auto h-8 w-8 text-primary-500' />
+                <h3 className='mt-2 text-lg font-bold'>For Customers</h3>
+                <p className='text-sm text-gray-600'>
+                  Scan, earn, and redeem rewards with smart contract security
+                </p>
+              </div>
+            </Link>
           </div>
 
           <ButtonLink className='mt-6' href='/launch' variant='light'>
