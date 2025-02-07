@@ -27,10 +27,6 @@ export interface CreateBusinessResult {
   businessId?: string;
 }
 
-export interface DemoBusinessData extends CreateBusinessPayload {
-  businessContext: string;
-}
-
 export enum BusinessCommand {
   checkRewards = 'checkRewards',
   makePayment = 'makePayment',
@@ -47,14 +43,14 @@ export const BusinessCommands = [
   {
     command: BusinessCommand.makePayment,
     regex: /(\d+\.?\d*)/,
-    keywords: ['pay', 'purchase', 'buy', 'spend']
+    keywords: ['pay', 'purchase', 'buy', 'spend'],
   },
   {
     command: BusinessCommand.checkRewards,
-    keywords: ['check', 'balance', 'points', 'rewards']
+    keywords: ['check', 'balance', 'points', 'rewards'],
   },
   {
     command: BusinessCommand.claimRewards,
-    keywords: ['claim', 'redeem', 'use']
-  }
+    keywords: ['claim', 'redeem', 'use'],
+  },
 ];

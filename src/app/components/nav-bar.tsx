@@ -1,5 +1,4 @@
 'use client';
-
 import {
   Disclosure,
   DisclosureButton,
@@ -7,12 +6,12 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  MenuItems,
 } from '@headlessui/react';
 import { Bars3Icon, QrCodeIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
 
-import { useWallet } from '@/app/contexts/WalletContext';
 import { siteConfig } from '@/constant/config';
+import { coinbaseConnector } from '../contexts/wagmiConfig';
 
 const navigation = [
   // { name: 'Dashboard', href: '/dashboard', current: true },
@@ -28,7 +27,10 @@ function classNames(...classes: any) {
 }
 
 export default function NavBar() {
-  const { address, connectWallet, signOut } = useWallet();
+  const { address } = useAccount();
+  const { connect } = useConnect();
+
+  const { disconnect } = useDisconnect();
 
   const abbreviateAddress = (addr: string) => {
     if (!addr) return '';
@@ -84,7 +86,12 @@ export default function NavBar() {
           <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
             {!address ? (
               <button
-                onClick={connectWallet}
+                onClick={() =>
+                  connect({
+                    connector: coinbaseConnector,
+                    chainId: siteConfig.defaultChain.id,
+                  })
+                }
                 className='rounded-md bg-primary-700 px-3 py-2 text-sm font-medium text-white hover:bg-primary-600'
               >
                 Connect Wallet
@@ -94,11 +101,11 @@ export default function NavBar() {
                 <MenuButton className='text-white text-sm font-medium px-3 py-2 bg-primary-700 rounded-md cursor-pointer hover:bg-primary-600'>
                   {abbreviateAddress(address)}
                 </MenuButton>
-                <MenuItems className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                <Menu.Items className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                   <MenuItem>
                     {({ active }) => (
                       <button
-                        onClick={signOut}
+                        onClick={() => disconnect()}
                         className={classNames(
                           active ? 'bg-gray-100' : '',
                           'block w-full text-left px-4 py-2 text-sm text-gray-700',
@@ -108,7 +115,7 @@ export default function NavBar() {
                       </button>
                     )}
                   </MenuItem>
-                </MenuItems>
+                </Menu.Items>
               </Menu>
             )}
           </div>

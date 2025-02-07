@@ -5,24 +5,30 @@ import {
   PencilSquareIcon,
   QrCodeIcon,
 } from '@heroicons/react/24/outline';
-import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { keccak256, toBytes } from 'viem';
+import { useAccount, useWalletClient } from 'wagmi';
 
 import { CreateBusinessPayload, CreateBusinessResult } from '@/lib/types';
+import { createCheckoutUrl, createQrUrl, isEmpty } from '@/lib/utils';
 
 import { BusinessContextModal } from '@/components/BusinessContextModal';
 import { Tooltip } from '@/components/Tooltip';
 
 import { DEMO_FORM_DATA } from '@/constant';
 import { siteConfig } from '@/constant/config';
-import { StampXAbi } from '@/contracts/StampX';
 
-import { createCheckoutUrl, createQrUrl } from '@/lib/utils';
-import { useWallet } from '../contexts/WalletContext';
+import { StampXAbi } from '@/contracts/StampX';
+import { ethers } from 'ethers';
+import { useEthersSigner } from '../contexts/useEthersSigner';
 
 export default function LaunchPage() {
-  const { address, provider } = useWallet();
+  const signer = useEthersSigner({
+    chainId: siteConfig.defaultChain.id as any,
+  });
+  const { address } = useAccount();
+
+  const walletClient = useWalletClient();
   const [formData, setFormData] = useState<CreateBusinessPayload>({
     name: '',
     rewardThreshold: '',
@@ -48,38 +54,47 @@ export default function LaunchPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!address || !provider) {
+    setResult({});
+    setError('');
+    setSuccess(false);
+    if (!address || !walletClient) {
       setError('Please connect your wallet first');
       return;
     }
 
-    setResult({});
+    // verify payment address
+    if (!ethers.isAddress(formData.paymentAddress)) {
+      setError('Invalid payment address');
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
-    setError('');
-    setSuccess(false);
 
     try {
       const businessHash = keccak256(toBytes(`${formData.name}${address}`));
 
-      const signer = await provider.getSigner();
       const contract = new ethers.Contract(
         siteConfig.contractAddress,
-        StampXAbi as any,
+        StampXAbi,
         signer,
       );
 
       const tx = await contract.registerBusiness(
         businessHash,
         formData.name,
-        ethers.parseEther(formData.rewardThreshold),
-        ethers.parseEther(formData.rewardAmount),
+        BigInt(parseInt(formData.rewardThreshold) + ''),
+        BigInt(parseInt(formData.rewardAmount) + ''),
         formData.paymentAddress,
         formData.businessContext,
+        {
+          gasLimit: 20000000,
+        },
       );
 
       await tx.wait();
       // log
-      console.log('Business registered successfully!', tx.hash);
+      console.log('Business registered successfully!', tx);
 
       setSuccess(true);
       setFormData({
@@ -91,6 +106,7 @@ export default function LaunchPage() {
       });
       setResult({ businessId: businessHash });
     } catch (err: any) {
+      console.error('Error registering business:', err);
       setError(
         err.message || 'An error occurred while registering the business',
       );
@@ -119,7 +135,7 @@ export default function LaunchPage() {
     });
   };
 
-  if (result.businessId) {
+  if (!isEmpty(result.businessId)) {
     return (
       <div className='min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-2xl mx-auto text-center'>
@@ -147,6 +163,11 @@ export default function LaunchPage() {
                 <ArrowTopRightOnSquareIcon className='ml-2 h-4 w-4' />
               </a>
 
+              <p>
+                Share the QR code with your customers to allow them to scan and
+                interact with your payment and loyalty programs.
+              </p>
+
               <a
                 href={createCheckoutUrl(result.businessId)}
                 target='_blank'
@@ -156,6 +177,12 @@ export default function LaunchPage() {
                 Your Loyalty AI
                 <ArrowTopRightOnSquareIcon className='ml-2 h-4 w-4' />
               </a>
+
+              <p>
+                Use this link to interact with your AI assistant much like your
+                customers would. Test out the assistant's responses and see how
+                it works.
+              </p>
             </div>
           </div>
         </div>
@@ -180,7 +207,6 @@ export default function LaunchPage() {
       <div className='max-w-2xl mx-auto'>
         <div className='text-center mb-8'>
           <QrCodeIcon className='h-16 w-16 text-primary-500 mx-auto mb-2' />
-
           <h1 className='text-3xl font-bold text-gray-900'>
             {siteConfig.createBusinessHeading}
           </h1>

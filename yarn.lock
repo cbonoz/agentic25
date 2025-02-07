@@ -995,10 +995,10 @@
     secp256k1 "^5.0.0"
     viem "^2.21.26"
 
-"@coinbase/onchainkit@^0.36.9":
-  version "0.36.9"
-  resolved "https://registry.yarnpkg.com/@coinbase/onchainkit/-/onchainkit-0.36.9.tgz#abe6d125faf03c97112d3cbcb39c44f44cde1a76"
-  integrity sha512-kBA38YGyq6kAXG/OOMTepLdP/j8MBqCCOaPKMtVmqTVgbNqcyBkLZhepAvgMVEN22pkPf4YmkhLWyyz+vdmDew==
+"@coinbase/onchainkit@^0.36.10":
+  version "0.36.10"
+  resolved "https://registry.yarnpkg.com/@coinbase/onchainkit/-/onchainkit-0.36.10.tgz#1d3bc977f43b19564ca11f8edd0d910349f90ddf"
+  integrity sha512-DkJ/hkqNrdvBLT8HJm9GBuS8A+9AgWMEG3EsjVaXrwTYimoXqSka7E5oUmzeQ7f9mA5YYCwsKBTGFQv7seesOA==
   dependencies:
     "@tanstack/react-query" "^5"
     clsx "^2.1.1"
@@ -1405,10 +1405,28 @@
     utf-8-validate "^5.0.2"
     uuid "^8.3.2"
 
+"@metamask/sdk-communication-layer@0.32.0":
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/@metamask/sdk-communication-layer/-/sdk-communication-layer-0.32.0.tgz#89710e807806836138ea5018b087731d6acab627"
+  integrity sha512-dmj/KFjMi1fsdZGIOtbhxdg3amxhKL/A5BqSU4uh/SyDKPub/OT+x5pX8bGjpTL1WPWY/Q0OIlvFyX3VWnT06Q==
+  dependencies:
+    bufferutil "^4.0.8"
+    date-fns "^2.29.3"
+    debug "^4.3.4"
+    utf-8-validate "^5.0.2"
+    uuid "^8.3.2"
+
 "@metamask/sdk-install-modal-web@0.31.5":
   version "0.31.5"
   resolved "https://registry.yarnpkg.com/@metamask/sdk-install-modal-web/-/sdk-install-modal-web-0.31.5.tgz#b5e903b63f936b9ae795f31137b4c9f0873c382d"
   integrity sha512-ZfrVkPAabfH4AIxcTlxQN5oyyzzVXFTLZrm1/BJ+X632d9MiyAVHNtiqa9EZpZYkZGk2icmDVP+xCpvJmVOVpQ==
+  dependencies:
+    "@paulmillr/qr" "^0.2.1"
+
+"@metamask/sdk-install-modal-web@0.32.0":
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/@metamask/sdk-install-modal-web/-/sdk-install-modal-web-0.32.0.tgz#86f80420ca364fa0d7710016fa5c81f95537ab23"
+  integrity sha512-TFoktj0JgfWnQaL3yFkApqNwcaqJ+dw4xcnrJueMP3aXkSNev2Ido+WVNOg4IIMxnmOrfAC9t0UJ0u/dC9MjOQ==
   dependencies:
     "@paulmillr/qr" "^0.2.1"
 
@@ -1422,6 +1440,31 @@
     "@metamask/providers" "16.1.0"
     "@metamask/sdk-communication-layer" "0.31.0"
     "@metamask/sdk-install-modal-web" "0.31.5"
+    "@paulmillr/qr" "^0.2.1"
+    bowser "^2.9.0"
+    cross-fetch "^4.0.0"
+    debug "^4.3.4"
+    eciesjs "^0.4.11"
+    eth-rpc-errors "^4.0.3"
+    eventemitter2 "^6.4.9"
+    obj-multiplex "^1.0.0"
+    pump "^3.0.0"
+    readable-stream "^3.6.2"
+    socket.io-client "^4.5.1"
+    tslib "^2.6.0"
+    util "^0.12.4"
+    uuid "^8.3.2"
+
+"@metamask/sdk@0.32.0":
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/@metamask/sdk/-/sdk-0.32.0.tgz#f0e179746fe69dccd032a9026884b45b519c1975"
+  integrity sha512-WmGAlP1oBuD9hk4CsdlG1WJFuPtYJY+dnTHJMeCyohTWD2GgkcLMUUuvu9lO1/NVzuOoSi1OrnjbuY1O/1NZ1g==
+  dependencies:
+    "@babel/runtime" "^7.26.0"
+    "@metamask/onboarding" "^1.0.1"
+    "@metamask/providers" "16.1.0"
+    "@metamask/sdk-communication-layer" "0.32.0"
+    "@metamask/sdk-install-modal-web" "0.32.0"
     "@paulmillr/qr" "^0.2.1"
     bowser "^2.9.0"
     cross-fetch "^4.0.0"
@@ -2103,7 +2146,7 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.66.0.tgz#163f670b3b4e3b3cdbff6698ad44b2edfcaed185"
   integrity sha512-J+JeBtthiKxrpzUu7rfIPDzhscXF2p5zE/hVdrqkACBP8Yu0M96mwJ5m/8cPPYQE9aRNvXztXHlNwIh4FEeMZw==
 
-"@tanstack/react-query@^5":
+"@tanstack/react-query@^5", "@tanstack/react-query@^5.66.0":
   version "5.66.0"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.66.0.tgz#9f7aa1b3e844ea6a0ad2ee61fccaed76e614b865"
   integrity sha512-z3sYixFQJe8hndFnXgWu7C79ctL+pI0KAelYyW+khaNJ1m22lWrhJU2QrsTcRKMuVPtoZvfBYrTStIdKo+x0Xw==
@@ -2449,7 +2492,19 @@
     "@walletconnect/ethereum-provider" "2.17.0"
     cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
 
-"@wagmi/core@2.16.3":
+"@wagmi/connectors@5.7.6", "@wagmi/connectors@^5.7.6":
+  version "5.7.6"
+  resolved "https://registry.yarnpkg.com/@wagmi/connectors/-/connectors-5.7.6.tgz#b31434f52546ba19cc381e5c4da0ebd60323386c"
+  integrity sha512-Kl6UbvPlWJY/NgWj7M1869Wdx0kLQxZrC0Hv1Lc+RhgiHspHvhpTW/+0OGJOAEQm3XtN20P98n3KcdglvB+19A==
+  dependencies:
+    "@coinbase/wallet-sdk" "4.2.3"
+    "@metamask/sdk" "0.32.0"
+    "@safe-global/safe-apps-provider" "0.18.5"
+    "@safe-global/safe-apps-sdk" "9.1.0"
+    "@walletconnect/ethereum-provider" "2.17.0"
+    cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
+
+"@wagmi/core@2.16.3", "@wagmi/core@^2.16.3":
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-2.16.3.tgz#abbff0a19e75beaad56ffb90da772641552d49c3"
   integrity sha512-SVovoWHaQ2AIkmGf+ucNijT6AHXcTMffFcLmcFF6++y21x+ge7Gkh3UoJiU91SDDv8n08eTQ9jbyia3GEgU5jQ==
@@ -7645,12 +7700,35 @@ viem@^2.1.1, viem@^2.21.26, viem@^2.21.33, viem@^2.22.16:
     ox "0.6.7"
     ws "8.18.0"
 
+viem@^2.22.22:
+  version "2.22.22"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-2.22.22.tgz#2b722f45c30bcfc13d12a89cd3a0c1c0045093a8"
+  integrity sha512-0z7EFheP+paC/KRlVpu7zXYiqkTX6GR86G0p84LnYr5NgaVxGz0mGsiERy41ThERX1ahkTdEWGGiNgfi6wVqBQ==
+  dependencies:
+    "@noble/curves" "1.8.1"
+    "@noble/hashes" "1.7.1"
+    "@scure/bip32" "1.6.2"
+    "@scure/bip39" "1.5.4"
+    abitype "1.0.8"
+    isows "1.0.6"
+    ox "0.6.7"
+    ws "8.18.0"
+
 wagmi@^2.12.24:
   version "2.14.9"
   resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-2.14.9.tgz#44c47ac6fc119e5ce40bee2c4e4dd5069a0d651a"
   integrity sha512-nDJ5hwPaiVpn/8Bi82m5K4BCqDiOSnOV976p/jKXt0svQABGdAxUxej0UgDRoVlrp+NutmejN+SyQKmhV477/A==
   dependencies:
     "@wagmi/connectors" "5.7.5"
+    "@wagmi/core" "2.16.3"
+    use-sync-external-store "1.4.0"
+
+wagmi@^2.14.10:
+  version "2.14.10"
+  resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-2.14.10.tgz#e5549cad7fd43e914dcebe91c2549a59bac28307"
+  integrity sha512-6KXZ4K4VC4fBY5M4t/KdBSqMujQVMV2MqiUnZf3ZZbSG2tpz1PEuJzS/umYRm8UIJAt8/KikC7LMewF5K6C+Nw==
+  dependencies:
+    "@wagmi/connectors" "5.7.6"
     "@wagmi/core" "2.16.3"
     use-sync-external-store "1.4.0"
 

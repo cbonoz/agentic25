@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
+import getConfig from 'next/config';
+import { headers } from 'next/headers';
 import * as React from 'react';
+import { cookieToInitialState } from 'wagmi';
 
 import '@/styles/colors.css';
 import '@/styles/globals.css';
@@ -7,7 +10,6 @@ import '@coinbase/onchainkit/styles.css';
 
 import { siteConfig } from '@/constant/config';
 
-import NavBar from './components/nav-bar';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
@@ -38,11 +40,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const initialState = cookieToInitialState(
+    getConfig(),
+    headers().get('cookie'),
+  );
   return (
     <html lang='en'>
       <body className='bg-gray-50'>
-        <Providers>
-          <NavBar />
+        <Providers initialState={initialState}>
           <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4'>
             {children}
           </div>

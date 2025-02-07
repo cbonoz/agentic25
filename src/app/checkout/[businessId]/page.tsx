@@ -5,18 +5,25 @@ import { ethers } from 'ethers';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaExclamationTriangle } from 'react-icons/fa';
+import { useAccount } from 'wagmi';
 
-import { useWallet } from '@/app/contexts/WalletContext';
+import { BusinessInfo } from '@/lib/types';
+
 import { BusinessInfo as BusinessInfoComponent } from '@/components/business-info';
 import { RewardsDialog } from '@/components/rewards-dialog';
 import { SignoutPrompt } from '@/components/signout-prompt';
+
+import { useEthersSigner } from '@/app/contexts/useEthersSigner';
+import { CHAT_API_URL, DEMO_FORM_DATA } from '@/constant';
 import { siteConfig } from '@/constant/config';
 import StampXAbi from '@/contracts/StampX.json';
-import { BusinessCommand, BusinessInfo, ChatResponse } from '@/lib/types';
 
 export default function CheckoutPage() {
   const { businessId } = useParams();
-  const { address, provider } = useWallet();
+  const { address } = useAccount();
+  const signer = useEthersSigner({
+    chainId: siteConfig.defaultChain.id as any,
+  });
   const [points, setPoints] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [isRewardsOpen, setIsRewardsOpen] = useState(false);
@@ -25,44 +32,28 @@ export default function CheckoutPage() {
   const [showSignoutPrompt, setShowSignoutPrompt] = useState(false);
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: '/api/chat',
-    body: {
-      businessContext: businessInfo?.businessContext
+    api: CHAT_API_URL,
+    id: businessId as string, // Add an id to maintain chat state
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${process.env.NEXT_PUBLIC_CHAT_USER_KEY}`,
     },
-    onResponse: (response) => {
-      if (typeof response === 'string') {
-        const parsedResponse = JSON.parse(response) as ChatResponse;
-        console.log('AI response:', parsedResponse);
+    onResponse: async (response) => {
+      // append message
 
-        switch (parsedResponse.command) {
-          case BusinessCommand.makePayment:
-            if (parsedResponse.amount) {
-              handleTransaction(parsedResponse.amount);
-            }
-            break;
-          case BusinessCommand.checkRewards:
-            checkRewards();
-            break;
-          case BusinessCommand.claimRewards:
-            // Implement claim rewards logic
-            break;
-          default:
-            // Regular chat message, no action needed
-            break;
-        }
-      }
-    },
+
+
+    }
   });
 
   const handleTransaction = async (amount: string) => {
-    if (!address || !provider || !businessId || !businessInfo) return;
+    if (!address || !signer || !businessId || !businessInfo) return;
 
     try {
       setLoading(true);
-      const signer = await provider.getSigner();
       const contract = new ethers.Contract(
         siteConfig.contractAddress,
-        StampXAbi as any,
+        StampXAbi.abi,
         signer,
       );
 
@@ -84,13 +75,13 @@ export default function CheckoutPage() {
   };
 
   const checkRewards = async () => {
-    if (!address || !provider || !businessId) return;
+    if (!address || !signer || !businessId) return;
 
     try {
       const contract = new ethers.Contract(
         siteConfig.contractAddress,
         StampXAbi.abi,
-        provider,
+        signer,
       );
       const points = await contract.getPoints(businessId, address);
       setPoints(Number(points));
@@ -102,14 +93,14 @@ export default function CheckoutPage() {
 
   // Add new function to fetch business info
   const fetchBusinessInfo = async () => {
-    if (!provider || !businessId) return;
+    if (!signer || !businessId) return;
 
     try {
       setError(null);
       const contract = new ethers.Contract(
         siteConfig.contractAddress,
-        StampXAbi.abi,
-        provider,
+        StampXAbi.abi as any,
+        signer,
       );
 
       const info = await contract.getBusinessInfo(businessId);
@@ -126,21 +117,21 @@ export default function CheckoutPage() {
         rewardAmount: ethers.formatEther(info[3]),
         isActive: info[4],
         paymentAddress: info[5],
-        businessContext: info[6]
+        businessContext: info[6],
       });
     } catch (error: any) {
       console.error('Error fetching business info:', error);
-      setError(error.message || 'Failed to load business information');
-      setBusinessInfo(null);
+      // setError(error.message || 'Failed to load business information');
+      setBusinessInfo(DEMO_FORM_DATA);
     }
   };
 
   // Call fetchBusinessInfo when component mounts
   useEffect(() => {
-    if (provider && businessId) {
+    if (signer && businessId) {
       fetchBusinessInfo();
     }
-  }, [provider, businessId]);
+  }, [signer, businessId]);
 
   const calculatePointsToNextReward = () => {
     if (!businessInfo || points === null) return null;
@@ -204,7 +195,17 @@ export default function CheckoutPage() {
                     ))}
                   </div>
 
-                  <form onSubmit={handleSubmit} className='flex gap-2'>
+                  <form
+                    onSubmit={(e) =>
+                      handleSubmit(e, {
+                        body: {
+                          businessContext: businessInfo?.businessContext,
+                          message: input,
+                        },
+                      })
+                    }
+                    className='flex gap-2'
+                  >
                     <input
                       value={input}
                       onChange={handleInputChange}

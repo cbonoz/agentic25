@@ -9,7 +9,7 @@ contract StampX {
         uint256 rewardAmount;
         bool isActive;
         address paymentAddress;
-        string businessContext; 
+        string businessContext;
     }
 
     struct Transaction {
@@ -80,15 +80,14 @@ contract StampX {
         }
     }
 
-    function _claimReward(bytes32 businessHash, address user) internal {
+    function _claimReward(bytes32 businessHash, address user) internal returns (string memory) {
         Business storage business = businesses[businessHash];
         require(userPoints[businessHash][user] >= business.rewardThreshold, "Insufficient points");
 
         userPoints[businessHash][user] -= business.rewardThreshold;
         emit RewardClaimed(businessHash, user, business.rewardAmount);
 
-        // In a real implementation, this would trigger a reward transfer
-        // payable(user).transfer(business.rewardAmount);
+        return "Reward claimed";
     }
 
     function getPoints(bytes32 businessHash, address user) external view returns (uint256) {

@@ -1,103 +1,74 @@
-'use client';
+// 'use client';
 
-import {
-  createCoinbaseWalletSDK,
-  ProviderInterface,
-} from '@coinbase/wallet-sdk';
-import { BrowserProvider, ethers } from 'ethers';
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+// import { coinbaseWallet } from '@wagmi/connectors';
+// import { createContext, ReactNode, useContext } from 'react';
+// import { useConnect, useDisconnect } from 'wagmi';
 
-import { siteConfig } from '@/constant/config';
+// import { siteConfig } from '@/constant/config';
 
-interface WalletContextType {
-  address: string | null;
-  provider: BrowserProvider | null;
-  connectWallet: () => Promise<void>;
-  signOut: () => void;
-}
+// import { useEthersProvider } from './useEthersProvider';
 
-const WalletContext = createContext<WalletContextType>({
-  address: null,
-  provider: null,
-  connectWallet: async () => {
-    console.warn('connectWallet method not implemented');
-  },
-  signOut: () => {
-    console.warn('signOut method not implemented');
-  },
-});
+// interface WalletContextType {
+//   address: any;
+//   provider: any;
+//   connectWallet: () => Promise<void>;
+//   signOut: () => void;
+// }
 
-export function WalletProvider({ children }: { children: ReactNode }) {
-  const [address, setAddress] = useState<string | null>(null);
-  const [provider, setProvider] = useState<BrowserProvider | null>(null);
-  const [coinbaseWallet, setCoinbaseWallet] = useState<any>(null);
+// const WalletContext = createContext<WalletContextType>({
+//   address: null,
+//   provider: null,
+//   connectWallet: async () => {
+//     console.warn('connectWallet method not implemented');
+//   },
+//   signOut: () => {
+//     console.warn('signOut method not implemented');
+//   },
+// });
 
-  useEffect(() => {
-    // Initialize Coinbase Wallet SDK
-    const coinbaseWallet = createCoinbaseWalletSDK({
-      appName: siteConfig.title,
-      appChainIds: [siteConfig.defaultChain.id],
-    });
+// export function WalletProvider({ children }: { children: ReactNode }) {
+//   const { connect } = useConnect();
+//   const address = '';
 
-    setCoinbaseWallet(coinbaseWallet);
-  }, []);
+//   const connector = coinbaseWallet({
+//     appName: siteConfig.title,
+//   });
 
-  useEffect(() => {
-    if (coinbaseWallet) {
-      connectWallet();
-    }
-  }, [coinbaseWallet]);
+//   const { disconnect } = useDisconnect();
 
-  const connectWallet = async () => {
-    if (!coinbaseWallet) {
-      console.error('Coinbase Wallet SDK not initialized');
-      return;
-    }
+//   const connectWallet = async () => {
+//     try {
+//       await connect({ connector });
+//     } catch (err) {
+//       console.error('Error connecting wallet:', err);
+//     }
+//   };
 
-    try {
-      // Initialize the Coinbase Wallet ethereum provider
-      const ethereumProvider = new ethers.BrowserProvider(
-        coinbaseWallet.getProvider(),
-      );
-      // Get user accounts
-      const accounts = await ethereumProvider.send('eth_requestAccounts', []);
+//   const signOut = () => {
+//     try {
+//       disconnect();
+//     } catch (err) {
+//       console.error('Error signing out:', err);
+//     }
+//   };
 
-      if (accounts.length > 0) {
-        setAddress(accounts[0]);
-        setProvider(ethereumProvider);
-      }
-    } catch (err) {
-      console.error('Error connecting to Coinbase Wallet:', err);
-    }
-  };
+//   const provider = useEthersProvider({
+//     chainId: siteConfig.defaultChain.id as any,
+//   });
 
-  const signOut = async () => {
-    if (!coinbaseWallet) {
-      console.error('Coinbase Wallet SDK not initialized');
-      return;
-    }
+//   // Note: provider is handled by wagmi internally
+//   return (
+//     <WalletContext.Provider
+//       value={{
+//         address: address,
+//         provider,
+//         connectWallet,
+//         signOut,
+//       }}
+//     >
+//       {children}
+//     </WalletContext.Provider>
+//   );
+// }
 
-    try {
-      setAddress(null);
-      setProvider(null);
-    } catch (err) {
-      console.error('Error signing out:', err);
-    }
-  };
-
-  return (
-    <WalletContext.Provider
-      value={{ address, provider, connectWallet, signOut }}
-    >
-      {children}
-    </WalletContext.Provider>
-  );
-}
-
-export const useWallet = () => useContext(WalletContext);
+// export const useWallet = () => useContext(WalletContext);

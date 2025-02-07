@@ -15,9 +15,13 @@ export function getExplorerUrl(address: string): string {
   return `https://sepolia.basescan.org/address/${address}`;
 }
 
-export function createQrUrl(businessId: string): string {
-  return `${window.location.origin}/qr/${businessId}`;
+export function createQrUrl(businessId: string | undefined): string {
+  return `${window.location.origin}/qr/${businessId || ''}`;
 }
-export function createCheckoutUrl(businessId: string): string {
-  return `${window.location.origin}/checkout/${businessId}`;
+export function createCheckoutUrl(businessId: string | undefined): string {
+  return `${window.location.origin}/checkout/${businessId || ''}`;
 }
+
+export const isEmpty = (value: any): boolean => {
+  return !value || (Array.isArray(value) && value.length === 0);
+};
