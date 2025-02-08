@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
-import getConfig from 'next/config';
-import { headers } from 'next/headers';
 import * as React from 'react';
 import { cookieToInitialState } from 'wagmi';
 
 import '@/styles/colors.css';
 import '@/styles/globals.css';
 import '@coinbase/onchainkit/styles.css';
+import getConfig from 'next/config';
+import { headers } from 'next/headers';
 
 import { siteConfig } from '@/constant/config';
 

@@ -1,5 +1,3 @@
-'use client';
-
 import { AddressLink } from '@/components/ui/address-link';
 import { siteConfig } from '@/constant/config';
 
@@ -8,17 +6,20 @@ export default function AboutPage() {
     {
       name: 'Coinbase Developer Platform',
       description: 'SmartWallets, Agentkit, OnchainKit, Coinbase SDK',
-      benefit: 'Custom prompt fed into deployment on Autonome with secure contract interactions.',
+      benefit:
+        'Custom prompt fed into deployment on Autonome with secure contract interactions.',
     },
     {
       name: 'Base',
       description: 'Base blockchain and payments ecosystem',
-      benefit: 'Core blockchain infrastructure with deployed solidity smart contracts.',
+      benefit:
+        'Core blockchain infrastructure with deployed solidity smart contracts.',
     },
     {
       name: 'Autonome',
       description: 'AgentKit deployment and hosting platform',
-      benefit: 'Streamlined deployment and management of AI-powered loyalty systems.',
+      benefit:
+        'Streamlined deployment and management of AI-powered loyalty systems.',
     },
     {
       name: 'Opsec',

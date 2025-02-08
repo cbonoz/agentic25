@@ -1,5 +1,3 @@
-'use client';
-
 import '@/lib/env';
 import {
   BuildingStorefrontIcon,
@@ -33,7 +31,8 @@ export default function HomePage() {
                 <BuildingStorefrontIcon className='mx-auto h-8 w-8 text-primary-500' />
                 <h3 className='mt-2 text-lg font-bold'>For Businesses</h3>
                 <p className='text-sm text-gray-600'>
-                  Set up QR codes and configure custom rewards for your customers
+                  Set up QR codes and configure custom rewards for your
+                  customers
                 </p>
               </div>
             </Link>

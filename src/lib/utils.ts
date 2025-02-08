@@ -18,19 +18,23 @@ export function getExplorerUrl(address: string, tx?: boolean): string {
   return `${baseUrl}/${txString}/${address}`;
 }
 
+const getBaseUrl = (baseUrl?: string | undefined) =>
+  baseUrl ||
+  window?.location?.origin ||
+  process.env.NEXT_PUBLIC_APP_URL ||
+  'stampxapp.opsec.run';
+
 export function createQrUrl(
   businessId: string | undefined,
   baseUrl?: string,
 ): string {
-  const base = baseUrl || window.location.origin;
-  return `${base}/qr/${businessId || ''}`;
+  return `${getBaseUrl(baseUrl)}/qr/${businessId || ''}`;
 }
 export function createCheckoutUrl(
   businessId: string | undefined,
   baseUrl?: string,
 ): string {
-  const base = baseUrl || window.location.origin;
-  return `${base}/checkout/${businessId || ''}`;
+  return `${getBaseUrl(baseUrl)}/checkout/${businessId || ''}`;
 }
 
 export const isEmpty = (value: any): boolean => {

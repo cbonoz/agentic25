@@ -116,8 +116,8 @@ contract StampX {
             uint256 rewardThreshold,
             uint256 rewardAmount,
             bool isActive,
-            address paymentAddress,    // Added return value
-            string memory businessContext    // Added return value
+            address paymentAddress,
+            string memory businessContext
         )
     {
         Business storage business = businesses[businessHash];

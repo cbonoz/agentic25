@@ -10,6 +10,13 @@ A Web3 Loyalty Program Platform with agent-driven contract interactions.
 
 We wanted to revolutionize traditional loyalty programs by bringing them to Web3. Many small businesses struggle with customer retention and implementing reward systems, while customers juggle multiple loyalty cards and points systems. We saw an opportunity to solve this with blockchain technology.
 
+## Example storefront
+
+QR Code (would be printed and displayed in the store): http://localhost:3000/qr/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
+
+Storefront chat: http://localhost:3000/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
+
+
 ## What it does
 
 StampX is a decentralized loyalty program platform that allows businesses to:
