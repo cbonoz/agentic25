@@ -160,7 +160,10 @@ export default function CheckoutPage() {
         <div className='grid lg:grid-cols-[400px,1fr] gap-6'>
           <div className='lg:sticky lg:top-6 lg:self-start'>
             {businessInfo && (
-              <BusinessInfoComponent businessInfo={businessInfo} />
+              <BusinessInfoComponent
+                businessInfo={businessInfo}
+                currentPoints={points}
+              />
             )}
           </div>
 

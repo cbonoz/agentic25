@@ -34,7 +34,7 @@ Customers can:
 
 3. <b>Base</b>: Entire project centers around the base blockchain and payments ecosystem. Integrated links to deployed solidity smart contracts
 
-4. <b>Opsec</b>: Secure App deployment
+4. <b>Opsec</b>: Secure App deployment. https://cloudverse.opsec.computer/dashboard
 
 Core:
 
@@ -50,7 +50,6 @@ Core:
 - Creating a seamless UX that bridges Web2 and Web3
 - Handling real-time updates for transactions and points
 - Optimizing smart contract gas costs
-
 
 ### Doing a StampX production deployment
 
