@@ -22,7 +22,7 @@ const getBaseUrl = (baseUrl?: string | undefined) =>
   baseUrl ||
   window?.location?.origin ||
   process.env.NEXT_PUBLIC_APP_URL ||
-  'stampxapp.opsec.run';
+  'https://stampx.vercel.app';
 
 export function createQrUrl(
   businessId: string | undefined,
