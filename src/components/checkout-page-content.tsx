@@ -14,6 +14,7 @@ import { SignoutPrompt } from '@/components/signout-prompt';
 import { CHAT_API_URL, DEMO_FORM_DATA } from '@/constant';
 import { siteConfig } from '@/constant/config';
 import StampXAbi from '@/contracts/StampX.json';
+import { getEthConversionRate } from '@/lib/fetch';
 import { BusinessInfo } from '@/lib/types';
 
 export default function CheckoutPageContent() {
@@ -29,6 +30,7 @@ export default function CheckoutPageContent() {
   const [error, setError] = useState<string | null>(null);
   const [showSignoutPrompt, setShowSignoutPrompt] = useState(false);
   const [isFirstMessage, setIsFirstMessage] = useState(true);
+  const [showRewardPopup, setShowRewardPopup] = useState(false);
 
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat({
@@ -54,8 +56,25 @@ export default function CheckoutPageContent() {
           input.toLowerCase().includes('claim') &&
           input.toLowerCase().includes('reward')
         ) {
-          console.log('detecte claim reward request');
+          console.log('detected claim reward request');
           claimReward();
+        }
+
+        // get last message
+        const lastMessage = newMessages[newMessages.length - 1].content;
+
+        if (lastMessage.toLowerCase().includes('please confirm sending $')) {
+          console.log('detected record transaction request');
+          // extract the money amount using a regex
+          const amount = lastMessage.match(/(\d+\.?\d*)/)?.[0];
+          // convert
+          const { data } = await getEthConversionRate();
+          const ethAmount = amount / data.USD;
+
+          // log values
+          console.log('send:', amount, data.USD, ethAmount);
+
+          sendTransaction(ethAmount.toString());
         }
       },
     });
@@ -74,11 +93,11 @@ export default function CheckoutPageContent() {
       const tx = await contract.claimReward(businessId, address);
       await tx.wait();
 
-      alert('Reward claimed successfully!');
+      setShowRewardPopup(true);
       checkRewards();
     } catch (error) {
       console.error('Reward claim failed:', error);
-      alert('Reward claim failed. Please try again.');
+      alert('Unable to claim reward. Try again later.');
     } finally {
       setLoading(false);
     }
@@ -86,8 +105,10 @@ export default function CheckoutPageContent() {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const paymentPrompt =
+      "If it seems like the user wants to make a payment and sends an amount, return 'Please confirm sending $X' where X is the amount in USD";
     const messageContent = isFirstMessage
-      ? `Business Context: ${businessInfo?.businessContext}. The user's current points are ${points}.  \n${input}`
+      ? `Business Context: ${businessInfo?.businessContext}. The user's current points/visits is ${points}. ${paymentPrompt}.\n${input}`
       : input;
 
     handleSubmit(e, {
@@ -99,8 +120,14 @@ export default function CheckoutPageContent() {
     setIsFirstMessage(false);
   };
 
-  const handleTransaction = async (amount: string) => {
+  const sendTransaction = async (amount: string) => {
     if (!address || !signer || !businessId || !businessInfo) return;
+
+    const ethAmount = parseFloat(amount);
+    if (ethAmount < 0.001) {
+      alert('Minimum transaction amount is 0.001 ETH');
+      return;
+    }
 
     try {
       setLoading(true);
@@ -114,12 +141,12 @@ export default function CheckoutPageContent() {
         businessId,
         businessInfo.paymentAddress,
         {
-          value: ethers.parseEther(amount || '0'),
+          value: ethers.parseEther(amount.substr(0, 10)),
         },
       );
       await tx.wait();
 
-      alert('Transaction recorded successfully!');
+      //   alert('Transaction recorded successfully!');
       setShowSignoutPrompt(true);
     } catch (error) {
       console.error('Transaction failed:', error);
@@ -138,9 +165,11 @@ export default function CheckoutPageContent() {
         StampXAbi.abi,
         signer,
       );
-      const points = await contract.getPoints(businessId, address);
-      console.log('points', points);
-      setPoints(Number(points));
+      const res = await contract.getPoints(businessId, address);
+      const p = Number(res);
+      console.log('points', p);
+
+      setPoints(p);
       if (openModal) {
         setIsRewardsOpen(true);
       }
@@ -199,7 +228,10 @@ export default function CheckoutPageContent() {
   const calculatePointsToNextReward = () => {
     if (!businessInfo || points === null) return null;
     const threshold = Number(businessInfo.rewardThreshold);
-    return Math.max(0, threshold - points);
+    // make sure points is a number else return 0
+    if (isNaN(points)) return 0;
+
+    return Math.max(0, threshold - points || 0);
   };
 
   return (
@@ -275,19 +307,19 @@ export default function CheckoutPageContent() {
                     </button>
                   </form>
 
-                  <button
+                  {/* <button
                     onClick={() => checkRewards(true)}
                     className='w-full border border-primary-600 text-primary-600 py-2 px-4 rounded-md hover:bg-primary-50'
                   >
                     Check Rewards
-                  </button>
+                  </button> */}
 
-                  <button
-                    onClick={() => handleTransaction('0.01')}
+                  {/* <button
+                    onClick={() => handleTransaction('0.001')}
                     className='w-full border border-primary-600 text-primary-600 py-2 px-4 rounded-md hover:bg-primary-50'
                   >
                     Record Transaction
-                  </button>
+                  </button> */}
                 </div>
 
                 <RewardsDialog
@@ -301,6 +333,26 @@ export default function CheckoutPageContent() {
                   isOpen={showSignoutPrompt}
                   onClose={() => setShowSignoutPrompt(false)}
                 />
+
+                {showRewardPopup && (
+                  <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+                    <div className='bg-white p-6 rounded-md'>
+                      <h2 className='text-xl font-semibold mb-4'>
+                        Reward Claimed Successfully!
+                      </h2>
+                      <p className='mb-4'>
+                        Please show this message to the cashier to redeem your
+                        reward.
+                      </p>
+                      <button
+                        onClick={() => setShowRewardPopup(false)}
+                        className='bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700'
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                )}
               </>
             )}
           </div>

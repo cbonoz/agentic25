@@ -60,8 +60,9 @@ contract StampX {
     function recordTransaction(
         bytes32 businessHash,
         address user
-    ) external payable onlyBusinessOwner(businessHash) {
+    ) external payable {
         require(businesses[businessHash].isActive, "Business not active");
+        require(msg.value >= 0.001 ether, "Minimum transaction amount is 0.001 ETH");
 
         uint256 amount = msg.value;
 
@@ -71,9 +72,12 @@ contract StampX {
             timestamp: block.timestamp
         }));
 
-        // Add points
-        userPoints[businessHash][user] += amount;
-        emit PointsEarned(businessHash, user, amount);
+        // Add a single point
+        userPoints[businessHash][user] += 1;
+        emit PointsEarned(businessHash, user, 1);
+
+        // Transfer the payment to the business owner
+        payable(businesses[businessHash].owner).transfer(amount);
     }
 
     function claimReward(bytes32 businessHash, address user) external onlyBusinessOwner(businessHash) returns (string memory) {

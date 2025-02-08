@@ -295,13 +295,12 @@ export default function LaunchPageContent() {
                   htmlFor='rewardThreshold'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Reward Threshold ($)
+                  Visits for Reward
                 </label>
                 <Tooltip content={siteConfig.formTooltips.rewardThreshold} />
               </div>
               <input
                 type='number'
-                step='0.001'
                 name='rewardThreshold'
                 id='rewardThreshold'
                 required
@@ -323,7 +322,7 @@ export default function LaunchPageContent() {
               </div>
               <input
                 type='number'
-                step='0.001'
+                step='1'
                 name='rewardAmount'
                 id='rewardAmount'
                 required

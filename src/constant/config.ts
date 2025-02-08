@@ -34,7 +34,7 @@ export const siteConfig = {
     businessContext:
       'Detailed instructions for your AI assistant about your business, menu items, and how to interact with customers',
     rewardThreshold:
-      'Minimum total amount in USD required for customers to earn a reward',
+      'Minimum number of paying visits required for customers to earn a reward',
     rewardAmount:
       'Amount in USD that customers receive as a reward when reaching the threshold',
     paymentAddress:

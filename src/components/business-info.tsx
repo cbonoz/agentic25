@@ -1,7 +1,7 @@
 import { AddressLink } from '@/components/ui/address-link';
 import { BusinessInfo as BusinessInfoType } from '@/lib/types';
 import { motion } from 'framer-motion';
-import { FaCoins, FaStore } from 'react-icons/fa';
+import { FaStore, FaUserCheck } from 'react-icons/fa';
 
 interface BusinessInfoProps {
   businessInfo: BusinessInfoType;
@@ -35,9 +35,9 @@ export function BusinessInfo({
       <div className='grid grid-cols-2 gap-4 mt-4'>
         <div className='bg-white p-4 rounded-xl shadow-sm'>
           <div className='flex items-center gap-2 mb-2'>
-            <FaCoins className='text-amber-500' />
+            <FaUserCheck className='text-amber-500' />
             <span className='text-sm font-semibold text-gray-600'>
-              Reward Threshold
+              Visits for reward
             </span>
           </div>
           <p className='text-2xl font-bold text-gray-800'>
@@ -47,7 +47,7 @@ export function BusinessInfo({
 
         <div className='bg-white p-4 rounded-xl shadow-sm'>
           <div className='flex items-center gap-2 mb-2'>
-            <FaCoins className='text-amber-500' />
+            <FaUserCheck className='text-amber-500' />
             <span className='text-sm font-semibold text-gray-600'>
               Your Progress
             </span>
@@ -74,12 +74,23 @@ export function BusinessInfo({
 
         <div className='flex justify-between items-center'>
           <span className='text-sm font-medium text-gray-600'>
-            Cash back at reward
+            Cash back at {businessInfo.rewardThreshold} visits
           </span>
           <span className='text-lg font-bold text-primary-600'>
-            {businessInfo.rewardAmount}
+            ${businessInfo.rewardAmount}
           </span>
         </div>
+
+        {/* <div className='mt-4'>
+          <h3 className='text-sm font-medium text-gray-600'>
+            Example Commands:
+          </h3>
+          <ul className='list-disc list-inside text-gray-600 space-y-2'>
+            <li>Check my rewards points</li>
+            <li>What offerings do you have?</li>
+            <li>I want to make a payment</li>
+          </ul>
+        </div> */}
       </div>
     </motion.div>
   );

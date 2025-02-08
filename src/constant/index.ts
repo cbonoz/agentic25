@@ -2,7 +2,7 @@ import { BusinessInfo } from '@/lib/types';
 
 export const DEMO_FORM_DATA: BusinessInfo = {
   name: 'Coffee Shop Demo',
-  rewardThreshold: '10.00',
+  rewardThreshold: 10,
   rewardAmount: '2.00',
   owner: '0x0',
   isActive: true,
