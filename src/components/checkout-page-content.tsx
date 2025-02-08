@@ -108,7 +108,7 @@ export default function CheckoutPageContent() {
     const paymentPrompt =
       "If it seems like the user wants to make a payment and sends an amount, return 'Please confirm sending $X' where X is the amount in USD";
     const messageContent = isFirstMessage
-      ? `Business Context: ${businessInfo?.businessContext}. The user's current points/visits is ${points}. ${paymentPrompt}.\n${input}`
+      ? `Business Context: ${businessInfo?.businessContext}. The user's current points/visits is ${points} and needs minimum ${businessInfo?.rewardThreshold} for a reward. ${paymentPrompt}.\n${input}`
       : input;
 
     handleSubmit(e, {
@@ -306,6 +306,17 @@ export default function CheckoutPageContent() {
                       Send
                     </button>
                   </form>
+
+                  <div className='mt-4'>
+                    <h3 className='text-sm font-medium text-gray-600'>
+                      Example Commands:
+                    </h3>
+                    <ul className='list-disc list-inside text-gray-600 space-y-2'>
+                      <li>How many visits do I need to next reward?</li>
+                      <li>What offerings do you have?</li>
+                      <li>I want to make a payment</li>
+                    </ul>
+                  </div>
 
                   {/* <button
                     onClick={() => checkRewards(true)}

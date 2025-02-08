@@ -44,7 +44,7 @@ Customers can:
 
 4. <b>Nethermind</b>: StampX is a commerce AI agent use case on Web3 each customer's assistant with smart contract actions. THe AI agent is connected to the primary contract deployment and can perform an initial set of actions like checking rewards balance, redemptions, and asking questions about the store based on input provided by the owner.
 
-Base Sepolia smart contract for StampX: https://sepolia.basescan.org/address/0xe7Dd44C72602AF2EcC6372eF2E6E3694C97d0b34
+Base Sepolia smart contract for StampX: https://sepolia.basescan.org/address/0x27A6E1ED6e0dd33265C7b7466e65a4aeFbCD3F2e
 
 Core:
 

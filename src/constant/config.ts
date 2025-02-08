@@ -27,7 +27,7 @@ export const siteConfig = {
   },
   slogan: 'AI-Powered Loyalty Rewards for Web3 Business',
   businessDescription:
-    'Launch an instant AI checkout assistant that can accept crypto payments and reward your customers right at point of sale.',
+    'Launch an instant AI checkout assistant that can accept digital payments and track your customer loyalty right at point of sale.',
   createBusinessHeading: 'Your AI Loyalty Assistant',
   formTooltips: {
     businessName: 'The name of your business that customers will see',
@@ -36,7 +36,7 @@ export const siteConfig = {
     rewardThreshold:
       'Minimum number of paying visits required for customers to earn a reward',
     rewardAmount:
-      'Amount in USD that customers receive as a reward when reaching the threshold',
+      'Discount in USD that customers receive as a reward when reaching the threshold',
     paymentAddress:
       'Ethereum address where you want to receive customer payments',
   },
