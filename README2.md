@@ -38,11 +38,13 @@ Customers can:
 
 1. <b>Coinbase Developer Platform</b>: SmartWallets, Agentkit, OnchainKit, Coinbase SDK, Coinbase extension and browser provider. Custom prompt fed into deployment on Autonome
 
-2. <b>Autonome</b>: AgentKit deployment and hosting
+2. <b>Autonome</b>: AgentKit deployment and hosting. Used to deploy the AgentKit model with storefront context and serve all chat requests. Deployed here: https://autonome.alt.technology/stampx-ighkdb
 
 3. <b>Base</b>: Entire project centers around the base blockchain and payments ecosystem. Integrated links to deployed solidity smart contracts
 
-4. <b>Opsec</b>: Secure App deployment. https://cloudverse.opsec.computer/dashboard
+4. <b>Nethermind</b>: StampX is a commerce AI agent use case on Web3 each customer's assistant with smart contract actions. THe AI agent is connected to the primary contract deployment and can perform an initial set of actions like checking rewards balance, redemptions, and asking questions about the store based on input provided by the owner.
+
+Base Sepolia smart contract for StampX: https://sepolia.basescan.org/address/0xe7Dd44C72602AF2EcC6372eF2E6E3694C97d0b34
 
 Core:
 

@@ -29,8 +29,8 @@ function classNames(...classes: any) {
 export default function NavBar() {
   const { address } = useAccount();
   const { connect } = useConnect();
-
   const { disconnect } = useDisconnect();
+  let chain: any;
 
   const abbreviateAddress = (addr: string) => {
     if (!addr) return '';
@@ -84,6 +84,9 @@ export default function NavBar() {
             </div>
           </div>
           <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
+            <span className='text-white text-sm font-medium mr-4'>
+              {chain?.name || siteConfig.defaultChain.name}
+            </span>
             {!address ? (
               <button
                 onClick={() =>

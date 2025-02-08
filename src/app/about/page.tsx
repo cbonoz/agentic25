@@ -22,9 +22,10 @@ export default function AboutPage() {
         'Streamlined deployment and management of AI-powered loyalty systems.',
     },
     {
-      name: 'Opsec',
-      description: 'Secure App deployment',
-      benefit: 'Enterprise-grade security for business and customer data.',
+      name: 'Nethermind',
+      description: 'Commerce AI integrated with deployed Ethereum contract',
+      benefit:
+        'The AI agent is connected to the primary contract deployment and can perform an initial set of actions like checking rewards balance, redemptions, and asking questions about the store based on input provided by the owner.',
     },
   ];
 

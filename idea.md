@@ -51,3 +51,5 @@ Example checkout page: http://localhost:3000/checkout/0x24cfa40a93d4e455c945aa99
 Coinbase developer platform
 Base
 Autonome
+
+Twitter Ideas: https://x.com/sodofi_/status/1883908596553105711/photo/1
