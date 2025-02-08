@@ -28,6 +28,7 @@ export default function CheckoutPageContent() {
   const [businessInfo, setBusinessInfo] = useState<BusinessInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showSignoutPrompt, setShowSignoutPrompt] = useState(false);
+  const [isFirstMessage, setIsFirstMessage] = useState(true);
 
   const { messages, input, handleInputChange, handleSubmit, setMessages } =
     useChat({
@@ -48,8 +49,55 @@ export default function CheckoutPageContent() {
           content,
         }));
         setMessages((prevMessages: any) => [...prevMessages, ...newMessages]);
+
+        if (
+          input.toLowerCase().includes('claim') &&
+          input.toLowerCase().includes('reward')
+        ) {
+          console.log('detecte claim reward request');
+          claimReward();
+        }
       },
     });
+
+  const claimReward = async () => {
+    if (!address || !signer || !businessId) return;
+
+    try {
+      setLoading(true);
+      const contract = new ethers.Contract(
+        siteConfig.contractAddress,
+        StampXAbi.abi,
+        signer,
+      );
+
+      const tx = await contract.claimReward(businessId, address);
+      await tx.wait();
+
+      alert('Reward claimed successfully!');
+      checkRewards();
+    } catch (error) {
+      console.error('Reward claim failed:', error);
+      alert('Reward claim failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const messageContent = isFirstMessage
+      ? `Business Context: ${businessInfo?.businessContext}. The user's current points are ${points}.  \n${input}`
+      : input;
+
+    handleSubmit(e, {
+      body: {
+        message: messageContent,
+      },
+    });
+
+    setIsFirstMessage(false);
+  };
 
   const handleTransaction = async (amount: string) => {
     if (!address || !signer || !businessId || !businessInfo) return;
@@ -65,7 +113,9 @@ export default function CheckoutPageContent() {
       const tx = await contract.recordTransaction(
         businessId,
         businessInfo.paymentAddress,
-        ethers.parseEther(amount),
+        {
+          value: ethers.parseEther(amount || '0'),
+        },
       );
       await tx.wait();
 
@@ -79,7 +129,7 @@ export default function CheckoutPageContent() {
     }
   };
 
-  const checkRewards = async () => {
+  const checkRewards = async (openModal?: boolean) => {
     if (!address || !signer || !businessId) return;
 
     try {
@@ -89,10 +139,14 @@ export default function CheckoutPageContent() {
         signer,
       );
       const points = await contract.getPoints(businessId, address);
+      console.log('points', points);
       setPoints(Number(points));
-      setIsRewardsOpen(true);
+      if (openModal) {
+        setIsRewardsOpen(true);
+      }
     } catch (error) {
       console.error('Error checking rewards:', error);
+      alert('Error checking rewards. Please try again.');
     }
   };
 
@@ -113,17 +167,24 @@ export default function CheckoutPageContent() {
         throw new Error('Invalid business data received');
       }
 
+      console.log('Business info:', info);
+
+      // convert bigint to number
+      const rewardThreshold = Number(info[2]);
+      const rewardAmount = Number(info[3]);
+
       setBusinessInfo({
         owner: info[0],
         name: info[1],
-        rewardThreshold: ethers.formatEther(info[2]),
-        rewardAmount: ethers.formatEther(info[3]),
+        rewardThreshold,
+        rewardAmount,
         isActive: info[4],
         paymentAddress: info[5],
         businessContext: info[6],
       });
     } catch (error: any) {
       console.error('Error fetching business info:', error);
+      alert('Error fetching business info. Please try again.');
       setBusinessInfo(DEMO_FORM_DATA);
     }
   };
@@ -131,6 +192,7 @@ export default function CheckoutPageContent() {
   useEffect(() => {
     if (signer && businessId) {
       fetchBusinessInfo();
+      checkRewards();
     }
   }, [signer, businessId]);
 
@@ -197,17 +259,7 @@ export default function CheckoutPageContent() {
                     ))}
                   </div>
 
-                  <form
-                    onSubmit={(e) =>
-                      handleSubmit(e, {
-                        body: {
-                          businessContext: businessInfo?.businessContext,
-                          message: input,
-                        },
-                      })
-                    }
-                    className='flex gap-2'
-                  >
+                  <form onSubmit={handleFormSubmit} className='flex gap-2'>
                     <input
                       value={input}
                       onChange={handleInputChange}
@@ -224,10 +276,17 @@ export default function CheckoutPageContent() {
                   </form>
 
                   <button
-                    onClick={checkRewards}
+                    onClick={() => checkRewards(true)}
                     className='w-full border border-primary-600 text-primary-600 py-2 px-4 rounded-md hover:bg-primary-50'
                   >
                     Check Rewards
+                  </button>
+
+                  <button
+                    onClick={() => handleTransaction('0.01')}
+                    className='w-full border border-primary-600 text-primary-600 py-2 px-4 rounded-md hover:bg-primary-50'
+                  >
+                    Record Transaction
                   </button>
                 </div>
 

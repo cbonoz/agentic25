@@ -5,22 +5,18 @@
 //   uint256 rewardAmount,
 //   bool isActive
 // )
-export interface BusinessInfo {
-  owner: string;
+
+export interface CreateBusinessPayload {
   name: string;
-  rewardThreshold: string;
-  rewardAmount: string;
-  isActive: boolean;
+  rewardThreshold: string | number;
+  rewardAmount: string | number;
   paymentAddress: string;
   businessContext: string;
 }
 
-export interface CreateBusinessPayload {
-  name: string;
-  rewardThreshold: string;
-  rewardAmount: string;
-  paymentAddress: string;
-  businessContext: string;
+export interface BusinessInfo extends CreateBusinessPayload {
+  owner: string;
+  isActive: boolean;
 }
 
 export interface CreateBusinessResult {

@@ -59,10 +59,11 @@ contract StampX {
 
     function recordTransaction(
         bytes32 businessHash,
-        address user,
-        uint256 amount
-    ) external onlyBusinessOwner(businessHash) {
+        address user
+    ) external payable onlyBusinessOwner(businessHash) {
         require(businesses[businessHash].isActive, "Business not active");
+
+        uint256 amount = msg.value;
 
         transactions[businessHash].push(Transaction({
             user: user,
@@ -73,11 +74,10 @@ contract StampX {
         // Add points
         userPoints[businessHash][user] += amount;
         emit PointsEarned(businessHash, user, amount);
+    }
 
-        // Auto-claim reward if threshold reached
-        if (userPoints[businessHash][user] >= businesses[businessHash].rewardThreshold) {
-            _claimReward(businessHash, user);
-        }
+    function claimReward(bytes32 businessHash, address user) external onlyBusinessOwner(businessHash) returns (string memory) {
+        return _claimReward(businessHash, user);
     }
 
     function _claimReward(bytes32 businessHash, address user) internal returns (string memory) {
