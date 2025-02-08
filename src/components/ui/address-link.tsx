@@ -7,7 +7,6 @@ interface AddressLinkProps {
   className?: string;
 }
 
-
 export function AddressLink({ address, chars = 4, className = '' }: AddressLinkProps) {
   return (
     <a

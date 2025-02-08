@@ -1,3 +1,4 @@
+import { siteConfig } from '@/constant/config';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -10,16 +11,26 @@ export function abbreviateAddress(address: string, chars = 4): string {
   return `${address.substring(0, chars)}...${address.substring(address.length - chars)}`;
 }
 
-export function getExplorerUrl(address: string): string {
+export function getExplorerUrl(address: string, tx?: boolean): string {
   // Using Base Sepolia explorer - adjust if using different network
-  return `https://sepolia.basescan.org/address/${address}`;
+  const txString = tx ? 'tx' : 'address';
+  const baseUrl = siteConfig.defaultChain.blockExplorers.default.url;
+  return `${baseUrl}/${txString}/${address}`;
 }
 
-export function createQrUrl(businessId: string | undefined): string {
-  return `${window.location.origin}/qr/${businessId || ''}`;
+export function createQrUrl(
+  businessId: string | undefined,
+  baseUrl?: string,
+): string {
+  const base = baseUrl || window.location.origin;
+  return `${base}/qr/${businessId || ''}`;
 }
-export function createCheckoutUrl(businessId: string | undefined): string {
-  return `${window.location.origin}/checkout/${businessId || ''}`;
+export function createCheckoutUrl(
+  businessId: string | undefined,
+  baseUrl?: string,
+): string {
+  const base = baseUrl || window.location.origin;
+  return `${base}/checkout/${businessId || ''}`;
 }
 
 export const isEmpty = (value: any): boolean => {

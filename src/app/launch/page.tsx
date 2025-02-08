@@ -195,7 +195,7 @@ export default function LaunchPage() {
       <div className='min-h-screen bg-gray-50 px-4 py-8'>
         <div className='max-w-2xl mx-auto text-center'>
           <p className='text-lg text-gray-600'>
-            Please connect your wallet to create a business
+            Please connect your wallet to launch your loyalty program
           </p>
         </div>
       </div>

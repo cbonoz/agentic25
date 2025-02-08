@@ -2,6 +2,7 @@
 
 import { createCheckoutUrl } from '@/lib/utils';
 import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import QRCode from 'react-qr-code';
 
 export default function QRPage() {
@@ -17,6 +18,7 @@ export default function QRPage() {
     );
   }
 
+  // get window origin from next router
   const checkoutUrl = createCheckoutUrl(hash as string);
   if (!checkoutUrl) {
     return null;

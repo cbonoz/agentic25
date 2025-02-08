@@ -40,10 +40,7 @@ export default function CheckoutPage() {
     },
     onResponse: async (response) => {
       // append message
-
-
-
-    }
+    },
   });
 
   const handleTransaction = async (amount: string) => {
@@ -168,7 +165,7 @@ export default function CheckoutPage() {
           </div>
 
           <div className='space-y-6'>
-            <h1 className='text-2xl font-bold'>Chat Checkout</h1>
+            {/* <h1 className='text-2xl font-bold'>Chat</h1> */}
 
             {!address ? (
               <p className='text-red-500'>
@@ -210,7 +207,7 @@ export default function CheckoutPage() {
                       value={input}
                       onChange={handleInputChange}
                       className='flex-1 rounded-md border border-gray-300 p-2'
-                      placeholder='Chat to complete your purchase...'
+                      placeholder='Chat with AI assistant...'
                     />
                     <button
                       type='submit'

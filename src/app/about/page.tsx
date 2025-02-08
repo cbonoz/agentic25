@@ -1,36 +1,29 @@
+'use client';
+
+import { AddressLink } from '@/components/ui/address-link';
+import { siteConfig } from '@/constant/config';
+
 export default function AboutPage() {
   const integrations = [
     {
       name: 'Coinbase Developer Platform',
-      description:
-        'AgentKit and OnchainKit for AI agents and smart contract interactions',
-      benefit:
-        'Automates transaction recording, provides personalized offers, and ensures secure smart contract executions.',
+      description: 'SmartWallets, Agentkit, OnchainKit, Coinbase SDK',
+      benefit: 'Custom prompt fed into deployment on Autonome with secure contract interactions.',
     },
     {
       name: 'Base',
-      description:
-        "Coinbase's Layer 2 solution for high-throughput transactions",
-      benefit:
-        'Enables scalable and cost-effective processing of numerous QR code scans and reward distributions.',
+      description: 'Base blockchain and payments ecosystem',
+      benefit: 'Core blockchain infrastructure with deployed solidity smart contracts.',
     },
     {
-      name: 'EigenLayer',
-      description: 'Decentralized verification mechanisms',
-      benefit:
-        'Ensures the integrity and authenticity of loyalty data, preventing fraud and double-spending.',
+      name: 'Autonome',
+      description: 'AgentKit deployment and hosting platform',
+      benefit: 'Streamlined deployment and management of AI-powered loyalty systems.',
     },
     {
-      name: 'Lit Protocol',
-      description: 'Decentralized access control management',
-      benefit:
-        'Protects user data privacy and secures sensitive transaction details.',
-    },
-    {
-      name: 'Gaia and Collab.Land',
-      description: 'Decentralized storage and community engagement',
-      benefit:
-        'Provides secure data storage and fosters a community-driven loyalty program.',
+      name: 'Opsec',
+      description: 'Secure App deployment',
+      benefit: 'Enterprise-grade security for business and customer data.',
     },
   ];
 
@@ -41,6 +34,19 @@ export default function AboutPage() {
           <h1 className='text-4xl font-bold text-gray-900 mb-8'>
             About StampX
           </h1>
+
+          {/* Contract Info */}
+          <div className='mb-12 text-left bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-semibold mb-4'>Smart Contract</h2>
+            <p className='text-gray-600 mb-2'>
+              StampX is deployed on {siteConfig.defaultChain.name} at:
+            </p>
+            <AddressLink
+              address={siteConfig.contractAddress}
+              chars={8}
+              className='text-lg'
+            />
+          </div>
 
           {/* Project Overview */}
           <div className='mb-12 text-left bg-white rounded-lg shadow-lg p-8'>
@@ -56,11 +62,10 @@ export default function AboutPage() {
               <li>
                 Business QR code setup with configurable reward thresholds
               </li>
-              <li>Custom checkout page</li>
-              <li>AI agent integration for transaction management</li>
-              <li>Purchase trend analytics</li>
-              <li>Payment execution</li>
-              <li>Smart contract transactions</li>
+              <li>Custom checkout page tailored to your business prompt</li>
+              <li>
+                AI agent integration for transaction and loyalty management
+              </li>
             </ul>
           </div>
 
