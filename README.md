@@ -14,9 +14,9 @@ We wanted to revolutionize traditional loyalty programs by bringing them to Web3
 
 ## Example storefront
 
-QR Code (would be printed and displayed in the store): http://localhost:3000/qr/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
+QR Code (would be printed and displayed in the store): https://stampx.vercel.app/qr/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
 
-Storefront chat: http://localhost:3000/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
+Storefront chat: https://stampx.vercel.app/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
 
 ## What it does
 
@@ -94,3 +94,47 @@ The StampX project is currently deployed on the Base Sepolia testnet. For produc
 - Enhanced AI capabilities: Implement personalized recommendation systems that analyze customer purchase history and preferences to suggest relevant products and optimize reward strategies.
 
 - Cross-business rewards: Enable businesses to form partnerships and allow customers to earn and redeem points across multiple participating merchants.
+
+### Screenshots
+
+#### Home Page
+
+<p align='center'>
+  <img src="./img/home.png" alt="Home Page"/>
+</p>
+
+#### About Page
+
+<p align='center'>
+  <img src="./img/about.png" alt="About Page"/>
+</p>
+
+#### Launching a new store via smart contract
+
+<p align='center'>
+  <img src="./img/deploy.png" alt="Deployment Process"/>
+</p>
+
+#### QR Code for Storefront
+
+<p align='center'>
+  <img src="./img/qr.png" alt="QR Code for Storefront"/>
+</p>
+
+#### AI Chat Interface (customer facing)
+
+<p align='center'>
+  <img src="./img/ask.png" alt="AI Chat Interface"/>
+</p>
+
+#### Smart Contract Interaction
+
+<p align='center'>
+  <img src="./img/contract.png" alt="Smart Contract Interaction"/>
+</p>
+
+#### Payment Process
+
+<p align='center'>
+  <img src="./img/pay.png" alt="Payment Process"/>
+</p>
