@@ -1,5 +1,5 @@
 <p align='center'>
-  <img src="./img/stamp_x.png"/>
+  <img src="https://i.ibb.co/SXpVzYXJ/stamp-x.png"/>
 </p>
 
 # StampX
@@ -7,6 +7,10 @@
 A Web3 Loyalty Program Platform with agent-driven contract interactions.
 
 Built for Agentic Ethereum 2025.
+
+Video demo:
+
+Live Demo Url: 
 
 ## Inspiration
 
@@ -36,15 +40,50 @@ Customers can:
 
 ## Technologies used
 
-1. <b>Coinbase Developer Platform</b>: SmartWallets, Agentkit, OnchainKit, Coinbase SDK, Coinbase extension and browser provider. Custom prompt fed into deployment on Autonome
+1. <b>Coinbase Developer Platform</b>
 
-2. <b>Autonome</b>: AgentKit deployment and hosting. Used to deploy the AgentKit model with storefront context and serve all chat requests. Deployed here: https://autonome.alt.technology/stampx-ighkdb
+   - AgentKit: Core of the checkout/loyalty experience. Used to build and deploy AI agents that can:
+     - Process natural language store queries
+     - Execute on-chain transactions
+     - Check loyalty point balances
+     - Verify reward eligibility
+   - OnchainKit: Manages real-time blockchain data and UI components.
+   - Coinbase SDK & Chrome Extension: Handles wallet connections with wagmi integration and coinbase connector from the sdk. AgentKit is used to trigger wallet workflows.
 
-3. <b>Base</b>: Entire project centers around the base blockchain and payments ecosystem. Integrated links to deployed solidity smart contracts
+2. <b>Autonome</b>
 
-4. <b>Nethermind</b>: StampX is a commerce AI agent use case on Web3 each customer's assistant with smart contract actions. THe AI agent is connected to the primary contract deployment and can perform an initial set of actions like checking rewards balance, redemptions, and asking questions about the store based on input provided by the owner.
+   - Hosts our custom AgentKit deployment with:
+     - Store-specific training data and context
+     - Transaction capabilities
+     - Points calculation logic
+     - Reward validation rules
+   - Endpoint: `https://autonome.alt.technology/stampx-ighkdb`
+   - Manages real-time chat state and context persistence
+   - Handles concurrent user sessions and load balancing for separate customer interactions.
+
+3. <b>Base</b>
+
+   - Primary chain for smart contract deployment and loyalty tracking
+   - Benefits:
+     - Low transaction costs for payment sends accrual
+     - Fast finality for instant rewards
+     - EVM compatibility for tooling support
+   - Contract Address: `0x27A6E1ED6e0dd33265C7b7466e65a4aeFbCD3F2e`
+   - Uses Base Sepolia testnet for development and testing
+   - CDP connected with onchainkit in the UI
+
+4. <b>Nethermind</b>
+   - Main AI agent functionality for the commerce use case is powered by solidity contracts and is open source.
+     - Smart contract event emission
+     - Automated reward distribution and validation
+     - Natural language processing for user queries
+     - Transaction intent detection
+   - Integrates with store-specific business logic
+   - Handles multi-step transactions and account state
 
 Base Sepolia smart contract for StampX: https://sepolia.basescan.org/address/0x27A6E1ED6e0dd33265C7b7466e65a4aeFbCD3F2e
+
+Project is open source, available here: https://github.com/cbonoz/agentic25
 
 Core:
 
@@ -70,20 +109,6 @@ The StampX project is currently deployed on the Base Sepolia testnet. For produc
 3. Redeploy smart contract on Base
 4. Redeploy agentkit with Base mainnet
 5. Make new website deployment (using nextj)
-
-<!-- ## Accomplishments that we're proud of
-
-- Built a fully functional Web3 loyalty platform
-- Created an intuitive UI that hides blockchain complexity
-- Developed flexible smart contracts for business customization
-- Integrated AI for natural customer interactions
-
-## What we learned
-
-- Smart contract development and testing
-- Web3 frontend integration
-- AI API implementation -->
-<!-- - Blockchain transaction management -->
 
 ## What's next for StampX
 

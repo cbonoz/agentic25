@@ -4,8 +4,10 @@ export const siteConfig = {
   titleTemplate: '%s | StampX',
   defaultTitle: 'StampX - Web3 Loyalty Rewards',
   defaultChain: baseSepolia,
+  slogan:
+    'A Web3 platform for loyalty rewards powered by Coinbase Developer Platform and AgentKit',
   description:
-    'A Web3 QR code system for loyalty rewards, powered by Coinbase Developer Platform',
+    'A Web3 loyalty platform for customer assitance and rewards, powered by AgentKit, Autonome, and Base.',
   url: 'https://www.github.com/cbonoz/agentic25',
   contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ?? '0x0',
   icons: {
@@ -25,7 +27,6 @@ export const siteConfig = {
     locale: 'en_US',
     type: 'website',
   },
-  slogan: 'AI-Powered Loyalty Rewards for Web3 Business',
   businessDescription:
     'Launch an instant AI checkout assistant that can accept digital payments and track your customer loyalty right at point of sale.',
   createBusinessHeading: 'Your AI Loyalty Assistant',

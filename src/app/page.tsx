@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 import ArrowLink from '@/components/links/ArrowLink';
 import ButtonLink from '@/components/links/ButtonLink';
+import { siteConfig } from '@/constant/config';
 
 export default function HomePage() {
   return (
@@ -19,11 +20,8 @@ export default function HomePage() {
       <section className='bg-white'>
         <div className='layout relative flex min-h-screen flex-col items-center justify-center py-8 text-center'>
           <QrCodeIcon className='h-16 w-16 text-primary-500' />
-          <h1 className='mt-4'>StampX</h1>
-          <p className='mt-2 text-sm text-gray-800'>
-            A Web3 QR code system for loyalty rewards, powered by Coinbase
-            Developer Platform
-          </p>
+          <h1 className='mt-4'>{siteConfig.title}</h1>
+          <p className='mt-2 text-md text-gray-800'>{siteConfig.slogan}</p>
 
           <div className='mt-6 grid grid-cols-1 gap-4 md:grid-cols-2'>
             <Link href='/launch'>
@@ -31,8 +29,8 @@ export default function HomePage() {
                 <BuildingStorefrontIcon className='mx-auto h-8 w-8 text-primary-500' />
                 <h3 className='mt-2 text-lg font-bold'>For Businesses</h3>
                 <p className='text-sm text-gray-600'>
-                  Set up QR codes and configure custom rewards for your
-                  customers
+                  Set up your AI loyalty program and configure custom rewards
+                  for your customers
                 </p>
               </div>
             </Link>
