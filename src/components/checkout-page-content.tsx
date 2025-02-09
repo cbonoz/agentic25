@@ -236,6 +236,10 @@ export default function CheckoutPageContent() {
     return Math.max(0, threshold - points || 0);
   };
 
+  const handleExampleQuestionClick = (question: string) => {
+    handleInputChange({ target: { value: question } } as any);
+  };
+
   return (
     <div className='container mx-auto p-6'>
       {error ? (
@@ -311,12 +315,46 @@ export default function CheckoutPageContent() {
 
                   <div className='mt-4'>
                     <h3 className='text-sm font-medium text-gray-600 mb-2'>
-                      Example Commands:
+                      Example commands:
                     </h3>
                     <ul className='list-disc list-inside text-gray-600 space-y-2'>
-                      <li>How many visits do I need to next reward?</li>
-                      <li>What offerings do you have?</li>
-                      <li>I want to make a payment</li>
+                      <li>
+                        <button
+                          type='button'
+                          onClick={() =>
+                            handleExampleQuestionClick(
+                              'How many visits do I need to next reward?',
+                            )
+                          }
+                          className='text-blue-600 hover:underline'
+                        >
+                          How many visits do I need to next reward?
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type='button'
+                          onClick={() =>
+                            handleExampleQuestionClick(
+                              'What offerings do you have?',
+                            )
+                          }
+                          className='text-blue-600 hover:underline'
+                        >
+                          What offerings do you have?
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type='button'
+                          onClick={() =>
+                            handleExampleQuestionClick('I want to pay $5')
+                          }
+                          className='text-blue-600 hover:underline'
+                        >
+                          I want to pay $5
+                        </button>
+                      </li>
                     </ul>
                   </div>
 

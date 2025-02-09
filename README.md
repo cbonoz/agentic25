@@ -71,7 +71,7 @@ Customers can:
      - Points calculation logic
      - Reward validation rules
    - Endpoint: `https://autonome.alt.technology/stampx-ighkdb`
-   - Manages real-time chat state and context persistence
+   - Used as the backend of the useChat hook and manages real-time chat state and context persistence
    - Handles concurrent user sessions and load balancing for separate customer interactions.
 
 3. <b>Base</b>
@@ -107,13 +107,13 @@ Project is open source, available here: https://github.com/cbonoz/agentic25
 
 ### Doing a StampX production deployment
 
-The StampX project is currently deployed on the Base Sepolia testnet. For production deployments (at your own discretion, these would be the next immediate steps):
+The StampX project is currently deployed on the Base Sepolia testnet. For deployments or other chains, these could be some initial steps (not exhaustive):
 
-1. Replace env
-2. Update siteConfig in config.ts with production values
+1. Update .env
+2. Update siteConfig in config.ts with production values (ex: Base vs. Base Sepolia)
 3. Redeploy smart contract on Base
 4. Redeploy agentkit with Base mainnet
-5. Make new website deployment (using nextj)
+5. Make new website deployment (uses nextjs)
 
 ## What's next for StampX
 
