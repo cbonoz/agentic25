@@ -308,7 +308,7 @@ export default function CheckoutPageContent() {
                   </form>
 
                   <div className='mt-4'>
-                    <h3 className='text-sm font-medium text-gray-600'>
+                    <h3 className='text-sm font-medium text-gray-600 mb-2'>
                       Example Commands:
                     </h3>
                     <ul className='list-disc list-inside text-gray-600 space-y-2'>
