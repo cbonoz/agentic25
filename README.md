@@ -142,6 +142,12 @@ The StampX project is currently deployed on the Base Sepolia testnet. For deploy
   <img src="./img/deploy.png" alt="Deployment Process"/>
 </p>
 
+#### Store front created
+
+<p align='center'>
+  <img src="./img/created.png" alt="Deployment Process"/>
+</p>
+
 #### QR Code for Storefront
 
 <p align='center'>
