@@ -22,6 +22,20 @@ QR Code (would be printed and displayed in the store): https://stampx.vercel.app
 
 Storefront chat: https://stampx.vercel.app/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
 
+
+<!-- Demo
+
+* Punch cards
+* Create an app that could integrate at point of sale
+* Login (uses coinbase SDK and smart wallets).
+* Enable agents to reduce friction with interfacing with businesses and submitting crypto payments
+* Each store gets a unique hash and is registered on a smart contract (here, can access from the about page as well)
+* Unique agent to your business with your prompt and language
+* One wallet used across
+* QR code and chat interface 
+
+ -->
+
 ## What it does
 
 StampX is a decentralized loyalty program platform that allows businesses to:
@@ -162,4 +176,10 @@ The StampX project is currently deployed on the Base Sepolia testnet. For produc
 
 <p align='center'>
   <img src="./img/pay.png" alt="Payment Process"/>
+</p>
+
+#### Agent deployed on autonome
+
+<p align='center'>
+  <img src="./img/autonome.png" alt="Payment Process"/>
 </p>
