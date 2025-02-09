@@ -147,6 +147,8 @@ export default function CheckoutPageContent() {
       await tx.wait();
 
       //   alert('Transaction recorded successfully!');
+      // refresh data
+      checkRewards();
       setShowSignoutPrompt(true);
     } catch (error) {
       console.error('Transaction failed:', error);

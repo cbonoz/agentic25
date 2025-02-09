@@ -166,6 +166,12 @@ The StampX project is currently deployed on the Base Sepolia testnet. For produc
   <img src="./img/pay.png" alt="Payment Process"/>
 </p>
 
+#### Example chat showing additional follow up questions
+
+<p align='center'>
+  <img src="./img/prompt2.png" alt="Questions"/>
+</p>
+
 #### Agent deployed on autonome
 
 <p align='center'>
