@@ -8,19 +8,19 @@ A Web3 Loyalty Program Platform with agent-driven contract interactions.
 
 Built for Agentic Ethereum 2025.
 
-Video demo:
+Video demo: https://youtu.be/Z2Tf2YFsfCs
 
 Live Demo Url: https://stampx.vercel.app (Base Sepolia)
+
+Example Storefront chat: https://stampx.vercel.app/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
+
+This is on Base sepolia. Connect your wallet and ask this storefront anything!
 
 ## Inspiration
 
 We wanted to revolutionize traditional loyalty programs by bringing them to Web3. Many small businesses struggle with customer retention and implementing reward systems, while customers juggle multiple loyalty cards and points systems. We saw an opportunity to solve this with blockchain technology.
 
-## Example storefront
-
 QR Code (would be printed and displayed in the store): https://stampx.vercel.app/qr/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
-
-Example Storefront chat: https://stampx.vercel.app/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
 
 <!-- Demo
 
