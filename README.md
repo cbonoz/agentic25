@@ -10,7 +10,7 @@ Built for Agentic Ethereum 2025.
 
 Video demo:
 
-Live Demo Url:
+Live Demo Url: https://stampx.vercel.app (Base Sepolia)
 
 ## Inspiration
 
@@ -98,14 +98,6 @@ Base Sepolia smart contract for StampX: https://sepolia.basescan.org/address/0x2
 
 Project is open source, available here: https://github.com/cbonoz/agentic25
 
-Core:
-
-- Frontend: Next.js, TailwindCSS, wagmi
-- Smart Contracts: Solidity, Hardhat
-- AI Integration: GPT-4 API for chat interactions
-- Blockchain: Deployed on Ethereum testnet
-- Authentication: Web3 coinbase wallet integration
-
 ## Challenges We ran into
 
 - Implementing secure point tracking on the blockchain
@@ -126,11 +118,8 @@ The StampX project is currently deployed on the Base Sepolia testnet. For produc
 ## What's next for StampX
 
 - Multi-chain support: Expand beyond Base to include other EVM-compatible chains like Ethereum mainnet, Polygon, and Arbitrum, allowing businesses to choose their preferred network.
-
 - Production deployment: Launch on Base mainnet with a focus on onboarding small to medium-sized businesses in the food and retail sectors.
-
 - Enhanced AI capabilities: Implement personalized recommendation systems that analyze customer purchase history and preferences to suggest relevant products and optimize reward strategies.
-
 - Cross-business rewards: Enable businesses to form partnerships and allow customers to earn and redeem points across multiple participating merchants.
 
 ### Screenshots
