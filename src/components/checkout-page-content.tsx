@@ -315,7 +315,7 @@ export default function CheckoutPageContent() {
 
                   <div className='mt-4'>
                     <h3 className='text-sm font-medium text-gray-600 mb-2'>
-                      Example commands:
+                      Example prompts:
                     </h3>
                     <ul className='list-disc list-inside text-gray-600 space-y-2'>
                       <li>
