@@ -10,7 +10,7 @@ Built for Agentic Ethereum 2025.
 
 Video demo:
 
-Live Demo Url: 
+Live Demo Url:
 
 ## Inspiration
 
@@ -20,8 +20,7 @@ We wanted to revolutionize traditional loyalty programs by bringing them to Web3
 
 QR Code (would be printed and displayed in the store): https://stampx.vercel.app/qr/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
 
-Storefront chat: https://stampx.vercel.app/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
-
+Example Storefront chat: https://stampx.vercel.app/checkout/0x47a66666899c9ed775e5b1942c435d4e95ca445940468975d583d050a23ae8ef
 
 <!-- Demo
 
@@ -32,7 +31,7 @@ Storefront chat: https://stampx.vercel.app/checkout/0x47a66666899c9ed775e5b1942c
 * Each store gets a unique hash and is registered on a smart contract (here, can access from the about page as well)
 * Unique agent to your business with your prompt and language
 * One wallet used across
-* QR code and chat interface 
+* QR code and chat interface
 
  -->
 
@@ -82,7 +81,7 @@ Customers can:
      - Low transaction costs for payment sends accrual
      - Fast finality for instant rewards
      - EVM compatibility for tooling support
-   - Contract Address: `0x27A6E1ED6e0dd33265C7b7466e65a4aeFbCD3F2e`
+   - Sepolia Contract: https://sepolia.basescan.org/address/0x2412FfB59ce049A5792773dFf493ba8583E5dF50
    - Uses Base Sepolia testnet for development and testing
    - CDP connected with onchainkit in the UI
 
@@ -95,7 +94,7 @@ Customers can:
    - Integrates with store-specific business logic
    - Handles multi-step transactions and account state
 
-Base Sepolia smart contract for StampX: https://sepolia.basescan.org/address/0x27A6E1ED6e0dd33265C7b7466e65a4aeFbCD3F2e
+Base Sepolia smart contract for StampX: https://sepolia.basescan.org/address/0x2412FfB59ce049A5792773dFf493ba8583E5dF50
 
 Project is open source, available here: https://github.com/cbonoz/agentic25
 
@@ -105,7 +104,7 @@ Core:
 - Smart Contracts: Solidity, Hardhat
 - AI Integration: GPT-4 API for chat interactions
 - Blockchain: Deployed on Ethereum testnet
-- Authentication: Web3 wallet integration
+- Authentication: Web3 coinbase wallet integration
 
 ## Challenges We ran into
 
