@@ -26,11 +26,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
-interface NavBarProps {
-  hideLaunchAndAbout?: boolean;
-}
-
-export default function NavBar({ hideLaunchAndAbout }: NavBarProps) {
+export default function NavBar() {
   const { address } = useAccount();
   const { connect } = useConnect();
   const { disconnect } = useDisconnect();
@@ -40,10 +36,6 @@ export default function NavBar({ hideLaunchAndAbout }: NavBarProps) {
     if (!addr) return '';
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
-
-  const filteredNavigation = hideLaunchAndAbout
-    ? navigation.filter((item) => item.name !== 'Launch Store' && item.name !== 'About')
-    : navigation;
 
   return (
     <Disclosure as='nav' className='bg-primary-900'>
@@ -73,7 +65,7 @@ export default function NavBar({ hideLaunchAndAbout }: NavBarProps) {
             </div>
             <div className='hidden sm:ml-6 sm:block'>
               <div className='flex space-x-4'>
-                {filteredNavigation.map((item) => (
+                {navigation.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
@@ -135,7 +127,7 @@ export default function NavBar({ hideLaunchAndAbout }: NavBarProps) {
 
       <DisclosurePanel className='sm:hidden'>
         <div className='space-y-1 px-2 pt-2 pb-3'>
-          {filteredNavigation.map((item) => (
+          {navigation.map((item) => (
             <DisclosureButton
               key={item.name}
               as='a'
