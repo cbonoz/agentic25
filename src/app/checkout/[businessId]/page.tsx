@@ -1,14 +1,10 @@
 import CheckoutPageContent from '@/components/checkout-page-content';
-
-export async function generateStaticParams() {
-  // Fetch the list of business IDs from your data source
-  const businessIds: Array<string> = [];
-
-  return businessIds.map((id: string) => ({
-    businessId: id,
-  }));
-}
+import { Suspense } from 'react';
 
 export default function CheckoutPage() {
-  return <CheckoutPageContent />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CheckoutPageContent />
+    </Suspense>
+  );
 }
